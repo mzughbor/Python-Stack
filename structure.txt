@@ -1,0 +1,22 @@
+.
+├── django
+│   ├── django_fullstack
+│   │   ├── assignments
+│   │   └── projects
+│   ├── django_fundamentals
+│   │   ├── assignments
+│   │   └── projects
+│   └── django_orm
+│       ├── assignments
+│       └── projects
+├── my_environments
+│   └── _python
+│       ├── oop
+│       │   ├── assignments
+│       │   └── projects
+│       └── python_fundamentals
+│           ├── assignments
+│           └── projects
+└── structure.txt
+
+19 directories, 1 file
