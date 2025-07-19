@@ -1,0 +1,41 @@
+1. >>> pip list
+pip list displays all installed Python packages in the current environment.
+
+2. >>> deactivate or the command for activating >>> source {{nameOfVerEnv}}/bin/activate
+why we use it ? * Virtual environments keep your projects isolated and avoid version conflicts.
+activate or deactivate your virtual environment based on the linux like Ubuntu OS.
+
+3. >>> pip3 list 
+list installed Python 3 packages we have.
+
+4. >>> pip install Django==2.2.4 
+Installs a specific version of Django (2.2.4) into your virtual environment.
+
+5. >>> pip freeze
+pip freeze gives a list of installed packages with versions in a format suitable for a requirements.txt file.
+
+6. >>> pip freeze > requirements.txt
+Saves the list of installed packages into a file called requirements.txt.
+This file is useful for sharing environments (e.g., other people can use pip install -r requirements.txt), to run the project properly...
+
+* in ohter words ? requirements.txt helps reproduce the exact environment on other machines or servers.
+
+main diffrences between freeze and list??
+-----------------------------------------------------------------------------
+-	Command			pip list					pip freeze					-
+-	Format			Table						package==version			-
+-	Readability		Human-friendly				Machine-friendly			-
+-	Purpose			View installed packages		Export for requirements.txt	-
+-	Output-Example	Django 2.2.4				Django==2.2.4				-
+-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
+
+7. >>> pip uninstall Django
+This safely removes Django from the environment.
+
+8. >>> pip show Django
+Shows detailed info about the Django package.
+
+This is useful for checking where a package is installed from and its metadata.
+
+
+mzughbor :)
