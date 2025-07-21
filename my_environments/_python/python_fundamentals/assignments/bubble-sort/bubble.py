@@ -10,3 +10,8 @@ def bubble_sort(input=[15,12,6,7,1,0]):
     return input
 
 print(bubble_sort())
+
+#print(bubble_sort([15,12,6,7,1,0]))
+print(bubble_sort([0,1,5,2,4]))
+print(bubble_sort([5,4,3,2,1]))
+print(bubble_sort([7,4,1,2,5]))
