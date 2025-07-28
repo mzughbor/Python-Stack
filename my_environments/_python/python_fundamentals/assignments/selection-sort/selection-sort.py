@@ -1,18 +1,18 @@
 def selection_sort(input=[1,2,3,4,5]):
 
     n = len(input)
-
-    for i in range(n-1):
-
-        # assume the min value is the first unsorted one to start
-        min = input[i]
+    for i in range(n):
         
-        for j in range(i,n):  # O(n^2) # responsible to find min one and do swap
+        # assume the min value is the first one to start
+        min_index = i
+        for j in range(i+1,n):  # O(n^2) # responsible to find min one
+            if input[j] < input[min_index]:                
+                min_index = j
             
-            if input[j] < min:
-                min = input[j]
-                input[i], input[j] = input[j], input[i]
-                    
+        if min_index != i:
+
+            input[i], input[min_index] = input[min_index], input[i]
+
     return input
 
 

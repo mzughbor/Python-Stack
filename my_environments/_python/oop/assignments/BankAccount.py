@@ -26,10 +26,7 @@ class BankAccount:
 
 
 account1 = BankAccount(0.01)
-account1.deposit(50)
-account1.withdraw(75)
-account1.yield_interest()
-account1.display_account_info()
+account1.deposit(50).withdraw(75).yield_interest().display_account_info()
 
 print("\n")
 
