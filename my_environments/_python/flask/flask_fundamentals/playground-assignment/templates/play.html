@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Playground 1{% endblock %}</title>
+    
+    <style>
+        body {
+        background-color: linen;
+        }
+
+        h2 {
+        color: lightslategray;
+        text-align: center;
+        }
+        
+        .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap:1%;
+        }
+        
+        .flex-container > div {
+        background-color: DodgerBlue; 
+        width: 200px;
+        height: 200px;
+        margin: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Welcome!</h2>
+
+    <div class="flex-container">
+        {% if itteration_num or color_used %}
+            {% for i in range(itteration_num): %}
+                <div style="background-color: {{ color_used | default('DodgerBlue') }}"></div>
+            {% endfor %}
+
+        {% else %}
+            <div></div>
+            <div></div>
+            <div></div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
