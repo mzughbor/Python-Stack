@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printing-Table</title>
+    <!-- Compressed CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css" crossorigin="anonymous">
+</head>
+<body>
+    <div class="grid-x align-center">
+        <div class="cell large-8">        
+            <h2>Hi there, I'm using Foundation.</h2>
+            <table>
+                <thead>
+                    <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Full Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users_info %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ user['first_name'] }}</td>
+                            <td>{{ user['last_name'] }}</td>
+                            <td>{{ user['first_name'] }} {{ user['last_name'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>       
+    <!-- Compressed JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/js/foundation.min.js" crossorigin="anonymous"></script>    
+</body>
+</html>
+
