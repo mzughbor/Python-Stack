@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey Index</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css">
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x align-center-middle" style="height: 100vh;">
+            <div class="cell small-12 medium-6">
+                <div class="callout">
+                    <h5>Submitted Info</h5>
+                    <p>Name: {{ name }}</p>
+                    <p>Dojo Location: {{ location }}</p>
+                    <p>Favorite Language:{{ language }}</p>
+                    <p>Comment:{{ comment }}</p>
+                    <div class="grid-x align-right">
+                        <div class="cell shrink">
+                            <a href="/" class="button">Go Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

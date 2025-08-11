@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.9.0/dist/css/foundation.min.css">
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x align-center-middle" style="height: 100vh;">
+            <div class="cell small-12 medium-6">
+                <form action="/result" method="POST" class="callout">
+                    <label>Your Name:
+                        <input type="text" name="name" required>
+                    </label>
+                    <label>Dojo Location:
+                        <select name="location">
+                            <option>Palestine</option>
+                            <option>Egypt</option>
+                            <option>Morocco</option>
+                        </select>
+                    </label>
+                    <label>Favorite Language:
+                        <select name="language">
+                            <option>Python</option>
+                            <option>JavaScript</option>
+                            <option>PHP</option>
+                        </select>
+                    </label>
+                    <label>Comment (optional):
+                        <textarea name="comment" rows="4"></textarea>
+                    </label>
+                    <div class="grid-x align-right">
+                        <button type="submit" class="cell shrink button ">Button</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
