@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dojos & Ninjas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="pt-5">
+    <div class="container min-vh-100 d-flex flex-column">
+
+        <!-- Row for forms -->
+        <div class="row justify-content-center">
+            
+            <!-- Add Dojo -->
+            <div class="col-md-5 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-center mb-4">Add a Dojo</h3>
+                        <form action="/add_dojo" method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3 row">
+                                <label for="name" class="col-sm-3 col-form-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input required type="text" class="form-control" id="name" name="name" placeholder="Enter dojo name" autocomplete="organization">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="city" class="col-sm-3 col-form-label">City</label>
+                                <div class="col-sm-9">
+                                    <input required type="text" class="form-control" id="city" name="city" placeholder="Enter city name" autocomplete="address-level2">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="state" class="col-sm-3 col-form-label">State</label>
+                                <div class="col-sm-9">
+                                    <input required type="text" class="form-control" id="state" name="state" placeholder="Enter state code" autocomplete="address-level1">
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Add Dojo</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Ninja -->
+            <div class="col-md-5 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="text-center mb-4">Add a Ninja</h3>
+                        <form action="/add_ninja" method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3 row">
+                                <label for="fname" class="col-sm-4 col-form-label">First Name</label>
+                                <div class="col-sm-8">
+                                    <input required type="text" class="form-control" id="fname" name="fname" placeholder="Enter first name" autocomplete="given-name">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="lname" class="col-sm-4 col-form-label">Last Name</label>
+                                <div class="col-sm-8">
+                                    <input required type="text" class="form-control" id="lname" name="lname" placeholder="Enter last name" autocomplete="family-name">
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="dojo" class="col-sm-4 col-form-label">Dojo</label>
+                                <div class="col-sm-8">
+                                    <select required class="form-select" id="dojo" name="dojo">
+                                        {% for dojo in dojos %}
+                                            <option value="{{ dojo.id }}">{{ dojo.name }}</option>
+                                        {% empty %}
+                                            <option disabled>No dojos yet, add one first...</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Add Ninja</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Divider -->
+        <hr class="my-5">
+
+        <!-- All Dojos Section -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h3 class="text-center mb-4">All the Dojos</h3>
+
+                {% for dojo in dojos %}
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ dojo.name }} 
+                                <span class="badge bg-info text-dark">{{ dojo.ninjas.count }} Ninjas</span>
+                            </h5>
+
+                            <form action="/delete_dojo/{{ dojo.id }}" method="POST" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" onclick="return confirm('Delete {{ dojo.name }} and all its ninjas?')" class="btn btn-sm btn-danger">Delete Dojo</button>
+                            </form>
+
+                            <ul class="mt-3">
+                                {% for ninja in dojo.ninjas.all %}
+                                    <li>{{ ninja.first_name }} {{ ninja.last_name }}</li>
+                                {% empty %}
+                                    <li>No ninjas yet</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="alert alert-secondary text-center">No dojos yet</div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dojos & Ninjas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .pt-5 { padding-top: 50px; }
+        .mb-3 { margin-bottom: 15px; }
+    </style>
+</head>
+<body class="pt-5">
+  <div class="container pt-5">
+    <div class="row">
+      <!-- Dojo form -->
+      <div class="col-md-5 col-md-offset-1">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center"><h3>Add a Dojo</h3></div>
+          <div class="panel-body">
+            <form action="/add_dojo" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input required type="text" class="form-control" id="name" name="name">
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <input required type="text" class="form-control" id="city" name="city">
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <input required type="text" class="form-control" id="state" name="state">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Add Dojo</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ninja form -->
+      <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center"><h3>Add a Ninja</h3></div>
+          <div class="panel-body">
+            <form action="/add_ninja" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input required type="text" class="form-control" id="fname" name="fname">
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input required type="text" class="form-control" id="lname" name="lname">
+              </div>
+              <div class="form-group">
+                <label for="dojo">Dojo</label>
+                <select class="form-control" id="dojo" name="dojo" required>
+                  {% for dojo in dojos %}
+                    <option value="{{ dojo.id }}">{{ dojo.name }}</option>
+                  {% empty %}
+                    <option disabled>Please add Dojo first...</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Add Ninja</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <hr>
+
+    <!-- Dojo list -->
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h3 class="text-center">All the Dojos</h3>
+        {% for dojo in dojos %}
+          <div class="list-group mb-3">
+            <div class="list-group-item active">
+              {{ dojo.name }} - Ninjas: {{ dojo.ninjas.count }}
+              <form action="/delete_dojo/{{dojo.id}}" method="POST" class="pull-right" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Delete {{ dojo.name }} and its ninjas?')">Delete</button>
+              </form>
+            </div>
+            {% for ninja in dojo.ninjas.all %}
+              <div class="list-group-item">{{ ninja.first_name }} {{ ninja.last_name }}</div>
+            {% empty %}
+              <div class="list-group-item text-muted">No ninjas yet</div>
+            {% endfor %}
+          </div>
+        {% empty %}
+          <div class="alert alert-info text-center">No dojos yet</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+

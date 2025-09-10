@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dojos & Ninjas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .pt-5 { padding-top: 50px; }
+        .mb-3 { margin-bottom: 15px; }
+    </style>
+</head>
+<body style="padding-top: 50px;">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                
+                <div class="text-center">
+                    <h3>Add a Dojo</h3>
+                </div>
+                <form action="/add_dojo" method="POST" class="p-4 border rounded shadow-sm">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-2">
+                                <label for="name" class="form-label">Name</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input required type="text" class="form-control" id="name" name="name" placeholder="Enter your name"  autocomplete="given-name">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-2">
+                                <label for="city" class="form-label">City</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input required type="text" class="form-control" id="city" name="city" placeholder="Enter city name" autocomplete="city-name">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-2">
+                                <label for="state" class="form-label">State</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input required type="text" class="form-control" id="state" name="state" placeholder="Enter state name" autocomplete="state">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-2 col-md-offset-5">
+                                <button type="submit" class="btn btn-primary px-4">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h3>Add a Ninja</h3>
+                </div>
+                <form action="/add_ninja" method="POST" class="p-4 border rounded shadow-sm">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="fname" class="form-label">First Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input required type="text" class="form-control" id="fname" name="fname" placeholder="Enter first name"  autocomplete="given-name">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="lname" class="form-label">Last Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input required type="text" class="form-control" id="lname" name="lname" placeholder="Enter last name" autocomplete="family-name">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="dojo" class="form-label">Dojo</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select required type="select" class="form-control" id="dojo" name="dojo" placeholder="Select dojo">
+                                    {% for dojo in dojos %}
+                                        <option value="{{ dojo.id }}">{{ dojo.name }}</option>
+                                        {% empty %}
+                                        <option value="">Please add Dojo first...</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-3">
+                                <button type="submit" class="btn btn-primary px-4">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr><br>
+        <div class="row m-3">
+            <div class="text-center">
+                <h3>All the Dojos</h3>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-5">
+                {% for dojo in dojos %}
+                    <p><b>{{ dojo.name }}</b> - {{ dojo.ninjas.all|length }}</p>
+                    
+                    <form action="/delete_dojo/{{dojo.id}}" method="POST" style="display:inline-block;">
+                        {% csrf_token %}
+                        <button type="submit" href="/delete_dojo/{{dojo.id}}" onclick="return confirm('Are you sure you want to delete {{ dojo.name }} and all associated ninjas?')" class="btn btn-link">Delete dojo</button>
+                    </form>
+                
+                    <ul>
+                    {% for ninja in dojo.ninjas.all %}
+                        <li>{{ ninja.first_name }} {{ ninja.last_name }}</li>
+                        {% empty %}
+                        <li>No ninjas yet</li>
+                    {% endfor %}
+                    </ul>
+
+                    {% empty %}
+                    <button disabled class="btn btn-secondary ">No dojos yet</button>
+                {% endfor %}
+            </div>            
+        </div>
+    </div>
+</body>
+</html>
+
