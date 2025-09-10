@@ -1,0 +1,509 @@
+=================================================================
+=================================================================
+============ Django Quick Start Guide for Dummies ===============
+============ Django Basics -** Using Linux Ubuntu ===============
+=================================================================
+=================================================================
+
+- to activate your Virtual Environment do this.
+source djangoPy3Env/bin/activate   # "djangoPy3Env" it's the name for VE you created before.
+-
+cd '/media/mzug/Save-Data/pythonStack/my_environments'
+source djangoPy3Env/bin/activate **
+
+=========================
+
+- to start project 
+django-admin startproject name_for_django_project
+
+=========================
+
+- inter your project dir then start new app... cd name_for_django_project ... then run
+python manage.py startapp app_name
+
+=========================
+
+-now go to settings.py in project dir and add your app name in INSTALLED_APPS array
+
+=========================
+
+-now go to your urls.py file same place/dir and add the path for the app in urlpatterns array 
+path('', include('app_name.urls')) # don't forget to import the include
+
+=========================
+
+- step to create the urls.py inside the app too, if it's not automatically created, it'll contain this..
+- importing views "the functions"..
+
+from django.urls import path
+from . import views
+urlpatterns = [
+	path('', views.root ) # this is function will be served for user when visisting root path..
+]
+=========================
+
+- now we go to views to create the functions >> in our app views.py file do this..
+- add extra import to exisisted ones / HttpResponse / JsonResponse / redirect or whatever you used in views return thing...
+
+from django.http import HttpResponse 
+def root(request): # we allways pass request in our routes ok ...
+	return HttpResponse("This is test first Django project! ") # later we gonna replaceit with templetes ...
+
+
+=================================================================
+--Command for runing the server / for test
+python manage.py runserver
+=================================================================
+
+-- routing-with-parameters 
+-- done from the name_for_django_project/some_app/urls.py file ...
+- Ex:
+
+urlpatterns = [ 
+	path('bears', views.one_method),
+	path('bears/<int:my_val>', views.another_method),
+	path('bears/<str:name>/poke', views.yet_another),
+	path('<int:id>/<str:color>', views.one_more),
+}
+
+- and from th name_for_django_project/some_app/views.py  > edit the methods properly..
+
+- Ex:
+def one_more(request, id, color):    
+	pass
+	- some logic... you want.
+	# id would be a number, and color a string from the URL
+
+
+=================================================================
+
+-- for rediercting and response types
+
+- urls.py file
+
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('', views.root_method),
+    path('another_route', views.another_method),
+    path('redirected_route', views.redirected_method
+]
+
+- in views.py file 
+
+from django.shortcuts import HttpResponse, redirect          # add redirect to import statement
+from django.http import JsonResponse
+
+def root_method(request):
+    return HttpResponse("String response from root_method")
+def another_method(request):
+    return redirect("/redirected_route")
+def redirected_method(request):
+    return JsonResponse({"response": "JSON response from redirected_method", "status": True})
+    
+=================================================================  
+-- Templates
+-project_name/app_name/views.py
+- we have to create dir named templates and we but the index.html in it..
+
+from django.shortcuts import render    # notice the import!
+
+def index(request):
+    context = {
+        "name": "Noelle",
+        "favorite_color": "turquoise",
+        "pets": ["Bruce", "Fitz", "Georgie"]
+    }
+    return render(request, "index.html", context)
+    
+
+- project_name/app_name/templates/index.html
+<h1>Info From Server:</h1>
+<p>Name: {{name}}</p>
+<p>Color: {{favorite_color}}</p>
+<p>Pets</p>
+<ul>
+{% for pet in pets %}
+   <li>{{pet}}</li>
+{% endfor %}
+</ul>copy
+Note: You cannot use square brackets with Django's template engine! Instead, use dot notation. 
+
+For example, array[0] becomes {{ array.0 }}    
+
+=================================================================
+
+-In our templates, when we want to reference our static files, we'll first need to add a line indicating we wish to use our static files:
+      {% load static %}        <!-- added this line -->
+      
+- so you create Dir >> side by side with templetes ok ... named static in your_app inside of it you may put css Dir then the style.css
+-Ex:
+ <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Index</title>
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+      <script src="{% static 'js/script.js' %}"></script>
+    </head>
+    <body>
+        <img src="{% static 'images/image.jpg' %}" />
+    </body> 
+=================================================================
+-CSRF Token
+ don't forget it in forms >>  {% csrf_token %}
+-Form Submission this attribute action="/the_route_hundle_post_Submitting..." is important and names in the form inputs...
+=================================================================
+Sessions - you have to run migrate command to have session activated, before testing it..
+>>  python manage.py migrate
+
+----
+
+- Ex:
+def some_function(request):
+    request.session['name'] = request.POST['name']
+    request.session['counter'] = 100
+
+-Notice /> #Django templates do not process square brackets, so we'll use dot notation instead:
+<p>Name in session is: {{request.session.name}}</p>
+----
+
+-Notice /> 
+>> 'key' in request.session 
+- Returns a boolean of whether a key is in session or not
+
+----
+>> del request.session['key'] # with try ... except block code..
+>> request.session.pop('key', None) # or use this way 
+--
+try:
+    del request.session['cart']
+    print("Session key 'cart' successfully deleted.")
+except KeyError:
+    print("Session key 'cart' did not exist.")
+--
+
+
+=================================================================
+-- hidden inputs --
+-- This idea for multiable forms in same page sending data to same route...
+-- in views.py we do hundle the receaving data part through the value for name attribute in hidden input element
+Ex:
+
+if request.POST['which_form'] == 'register':
+  //do registration process
+elif request.POST['which_form'] == 'login':
+  //do login process
+
+--Ex:
+-- in the template.html file we have
+
+<form method="post" action="/process">
+    {% csrf_token %}
+    <input type="hidden" name="which_form" value="register">
+    <input type="text" name="first_name">
+    <input type="text" name="last_name">
+    <input type="text" name="email">
+    <input type="password" name="password">
+    <input type="submit" value="Register">
+</form>
+<form method="post" action="/process">
+    {% csrf_token %}
+    <input type="hidden" name="which_form" value="login">
+    <input type="text" name="email">
+    <input type="password" name="password">
+    <input type="submit" value="Login">
+</form>
+
+
+=================================================================
+============ Django Object Relational Mapper (ORM) ==============
+=================================================================
+
+--Ex:
+from django.db import models
+    
+class Movie(models.Model):
+    title = models.CharField(max_length=45)
+    description = models.TextField()
+    release_date = models.DateTimeField()
+    duration = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+=================================================================
+->> https://learn.axsos.academy/courses/take/python_stack/texts/55932478-models
+-Model field reference ¶ Documentation >> https://docs.djangoproject.com/en/2.2/ref/models/fields/#field-types
+=================================================================
+
+python manage.py shell
+
+---- ORM CRUD Commands ----
+
+-- Methods that return a single instance of a class
+ClassName.objects.create(field1="value for field1", field2="value for field2", etc.) # Creating a new record
+ClassName.objects.first() # gets the first record in the table
+ClassName.objects.last() # gets the last record in the table
+ClassName.objects.get(id=1) # gets the record in the table with the specified id
+
+-- Methods that return a list of instances of a class
+ClassName.objects.all() # gets all the records in the table
+ClassName.objects.filter(field1="value for field1", etc.) # gets any records matching the query provided
+ClassName.objects.exclude(field1="value for field1", etc.) # gets any records not matching the query provided
+
+-- Updating an existing record
+c = ClassName.objects.get(id=1)
+c.field_name = "some new value for field_name"
+c.save()
+
+-- Deleting an existing record
+c = ClassName.objects.get(id=1)
+c.delete()
+
+---- Other helpful methods
+
+-- Displaying records
+ClassName.objects.get(id=1).__dict__ 	# shows a single record's values as a dictionary.
+ClassName.objects.all().values()       #shows all the values of a QuerySet (i.e., multiple instances)
+
+--Real Example: -- difference all() alone and all().values()
+In [2]: from users_app.models import User
+
+In [3]: User.objects.all()
+Out[3]: <QuerySet [<User: Nada Ahmed>, <User: Nada Pancakes>, <User: Mahmoud Said>]>
+
+In [4]: User.objects.all().values()
+Out[4]: <QuerySet [{'id': 1, 'first_name': 'Nada', 'last_name': 'Ahmed', 'email_address': 'nada@gmail.com', 'age': 30, 'created_at': datetime.datetime(2025, 9, 9, 7, 29, 11, 339595, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2025, 9, 9, 7, 29, 11, 344241, tzinfo=datetime.timezone.utc)}, {'id': 3, 'first_name': 'Nada', 'last_name': 'Pancakes', 'email_address': 'nada@gmail.com', 'age': 30, 'created_at': datetime.datetime(2025, 9, 9, 7, 29, 11, 339595, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2025, 9, 9, 7, 29, 11, 344241, tzinfo=datetime.timezone.utc)}, {'id': 4, 'first_name': 'Mahmoud', 'last_name': 'Said', 'email_address': 'mzughbor@gmail.com', 'age': 25, 'created_at': datetime.datetime(2025, 9, 9, 7, 29, 11, 339595, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2025, 9, 9, 7, 29, 11, 344241, tzinfo=datetime.timezone.utc)}]>
+
+-- Ordering records
+ClassName.objects.all().order_by("field_name") 	  # orders by field provided, ascending
+ClassName.objects.all().order_by("-field_name")    #orders by field provided, descending
+=================================================================
+
+- Notice / Example for adding recored in shell in 2 ways...
+-1
+newly_created_movie = Movie.objects.create(title="The Princess Bride",description="the best movie ever",release_date="1987-09-25",duration=98)
+-2
+newly_created_movie = Movie(title="The Princess Bride",description="the best movie ever",release_date="1987-09-25",duration=98)
+newly_created_movie.save()
+
+-----------------------------------------------------------------
+----------------------- To Wrap things up... --------------------
+-----------------------------------------------------------------
+
+- ClassName.objects.all() >>>>  SQL Equivalent: "SELECT * FROM tablename;"
+
+- ClassName.objects.filter(field1="value to match", field2="another value", etc.) >>>> 
+	SQL Equivalent: "SELECT * FROM tablename WHERE field='value to match' AND field2='another value';"
+
+- Exclude (WHERE NOT) ...
+
+- So as output being a list (technically a QuerySet) we can loop throguh the result as Ex:
+all_movies = Movie.objects.all()
+for m in all_movies:    
+    print(m.title)		# that means m has all the properties of the Movie class, including title, release_date, etc.
+
+- ClassName.objects.get(field1="unique value") >>>>
+	SQL Equivalent: "SELECT * FROM tablename WHERE field1='unique value' LIMIT 1;"
+
+- ClassName.objects.last() >>>>
+	SQL Equivalent: "SELECT * FROM table-name ORDER BY id DESC LIMIT 1;"
+
+-- Notice When working with a single instance, we can access any of the instance's values with dot notation.
+-Ex:
+print("Movie 7", one_movie.title)
+print("First movie", first_movie.release_date)
+print("Last movie", last_movie.description)
+
+- Updating an existing record in shell will be in >>>> SQL statement like that: Ex below:
+	movie_to_update = Movie.objects.get(id=42)
+	movie_to_update.description = "the answer to the universe"
+	movie_to_update.title = "The Hitchhiker's Guide to the Galaxy"
+	movie_to_update.save()
+		>>>> "UPDATE table name SET field1='new value', field2='new value' WHERE id=id_value;"
+
+- To delete an existing record: Ex belwo:
+	movie_to_delete = Movie.objects.get(id=2)
+	movie_to_delete.delete()
+	
+	>>>> "DELETE FROM tablename WHERE id=2;"
+
+=================================================================
+
+-- practicing > real add to Movie model we have ...
+-- adding using shell..
+-- get release_date issue solved... by doing this...
+
+###this in Shell
+from djApp1.models import Movie
+from django.utils import timezone
+from datetime import datetime # Import datetime, not just date
+
+newly_created_movie = Movie.objects.create(
+    title="The Princess Bride",
+    description="the best movie ever",
+    release_date=timezone.make_aware(datetime(1987, 9, 25)),
+    duration=98
+)
+
+
+-----------------------------------------------------------------
+----------- One to Many Relationships ---------------------------
+-----------------------------------------------------------------
+
+-- One to Many Relationships >> ORM  >>  #it's about Here >> ForeignKey()
+
+class Author(models.Model):
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    author = models.ForeignKey(Author, related_name="books", on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+=================================================================
+
+-- Creating new recored about[One to Many Relationships] like below example...
+
+this_author = Author.objects.get(id=2)    # get an instance of an Author
+my_book = Book.objects.create(title="Little Women", author=this_author)    # set the retrieved author as the author of a new book
+    
+-- or in one line...
+my_book = Book.objects.create(title="Little Women", author=Author.objects.get(id=2))
+=================================================================
+
+-- Joins in Django happen automatically.
+	-- Reading data from One to Many Relationship.?
+
+some_book = Book.objects.get(id=5)
+
+some_book.title        # returns a string that is the title of the book
+some_book.author    # returns the Author instance associated with this book
+
+some_book.author.name        # return the name of the author of this book
+some_book.author.id        # returns the id of the author of this book
+
+this_author = Author.objects.get(id=2)
+books = Book.objects.filter(author=this_author)
+    
+# one-line version:
+books = Book.objects.filter(author=Author.objects.get(id=2))
+
+=================================================================
+- Ex:
+
+-- book_project/apps/books/views.py
+from books_app.models import Book, Author
+
+def index(request):
+    context = {"authors": Author.objects.all()}    # we're only sending up all the authors
+    return render(request, "index.html", context)
+
+
+
+-- in index.html Templates Dir...    
+book_project/apps/books/templates/index.html
+-- below the >> author.books.all << books part came from here in models >> models.ForeignKey(Author, related_name="books"... it's what we called reversed lookup for realted_name argument...
+
+<h1>Author List</h1>
+<ul>
+  {% for author in authors %}
+    <li>{{author.name}}
+      <ul>
+        <!-- looping through each author's books! -->
+        {% for book in author.books.all %}    
+          <li><em>{{book.title}}</em></li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
+</ul>
+
+=================================================================
+-- Many to Many Relationships >>  ORM  >> 
+	#it's about Here >> models.ManyToManyField(Table_1,related_name="reverse_back_way.."
+
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=255)
+    books = models.ManyToManyField(Book, related_name="publishers")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+=================================================================
+
+-- Notice: / it doesn't matter which model has the ManyToManyField. 
+-- The model would still work if the Book model had a field named publishers instead (though we would need to put the Publisher class first)...
+
+=================================================================
+-- [Many to Many Relationships] -- adding relationship
+
+-- Adding a relationship between two existing records is simple:
+
+this_book = Book.objects.get(id=4)              # retrieve an instance of a book
+this_publisher = Publisher.objects.get(id=2)    # retrieve an instance of a publisher
+    
+-- There is 2 options that do the same thing:
+
+this_publisher.books.add(this_book)        # add the book to this publisher's list of books
+-- OR --
+this_book.publishers.add(this_publisher)    # add the publisher to this book's list of publishers
+
+=================================================================
+-- [Many to Many Relationships] -- deleting relationship..
+
+-- Remove relationship between two existing records: Ex:
+
+this_book = Book.objects.get(id=4)              # retrieve an instance of a book
+this_publisher = Publisher.objects.get(id=2)    # retrieve an instance of a publisher
+    
+-- There is 2 options that do the same thing:
+
+this_publisher.books.remove(this_book)        # remove the book from this publisher's list of books
+--OR
+this_book.publishers.remove(this_publisher)    # remove the publisher from this book's list of publishers
+
+-- So,
+-- ManyToManyField is automatically symmetrical. <<
+
+----
+this_publisher.books.all()    # get all the books this publisher is publishing
+this_book.publishers.all()    # get all the publishers for this bookcopy
+
+-- in views >> Remember to leave off the parentheses when referring to this collection in your template: this_publisher.books.all.
+
+=================================================================
+
+
+
+
+
+
+
+
+
+
+
+=================================================================
+
+
+=================================================================
+
+
+=================================================================
+
+
+=================================================================
+
+
+=================================================================
+

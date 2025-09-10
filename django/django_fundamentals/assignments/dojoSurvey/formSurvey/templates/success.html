@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Details</title>
+    <style>
+      body,
+      .bg-white,
+      h1,
+      p,
+      strong,
+      a {
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Simple JavaScript to toggle dark mode
+      function toggleDarkMode() {
+        const html = document.documentElement;
+        html.classList.toggle("dark");
+      }
+    </script>
+  </head>
+  <body
+    class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen p-4"
+  >
+    <div
+      class="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8"
+    >
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+        Submitted Info
+      </h1>
+
+      <div class="space-y-4 text-lg text-gray-800 dark:text-gray-200">
+        <p>Hi, there! <br />You're request has been submited successfully.</p>
+        <p>{% if 'context' in request.session %}</p>
+        <span> Yes, you have session now.</span>
+        {% else %}
+        <span> No, you don't any sessions in this site.</span>
+        {% endif %}
+      </div>
+      <div class="mt-8 flex justify-end space-x-3">
+        <a
+          href="{% url 'home' %}"
+          class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200"
+        >
+          Back
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

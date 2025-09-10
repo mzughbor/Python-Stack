@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Request Dump</title>
+    <style>
+        body { font-family: monospace; background: #f5f5f5; padding: 20px; }
+        h1 { color: #444; }
+        pre { background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 8px; }
+        pre {
+            white-space: pre-wrap;   /* Wrap long lines */
+            word-wrap: break-word;   /* Break long words if needed */
+            overflow-x: auto;        /* Horizontal scroll if still too long */
+        }
+    </style>
+</head>
+<body>
+    <h1>🔎 Request Dump</h1>
+    <pre>
+Method: {{ method }}
+Path: {{ path }}
+
+GET Params:
+{{ get_params }}
+
+POST Data:
+{{ post_data }}
+
+Headers:
+{{ headers }}
+
+Body:
+{{ body }}
+
+User:
+{{ user }}
+    </pre>
+</body>
+</html>

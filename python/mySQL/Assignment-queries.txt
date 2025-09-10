@@ -1,0 +1,29 @@
+-- Choose the database
+USE twitter;
+
+-- CREATE: insert a new user
+INSERT INTO users (first_name, last_name, birthday, handle, created_at, updated_at)
+VALUES ('Mahmoud', 'Zughbor', '1999-06-14', 'mzughbor', NOW(), NOW());
+
+-- Add again: to test updating without where statment 
+INSERT INTO users (first_name, last_name, birthday, handle, created_at, updated_at)
+VALUES ('Mahmoud', 'Zughbor', '1999-06-14', 'msaid', NOW(), NOW());
+
+-- READ: get the first 2 users
+SELECT id, first_name, last_name, birthday, handle FROM users LIMIT 2;
+
+-- UPDATE: change the handle of the new user
+UPDATE users
+SET handle = 'mzug'
+WHERE first_name = 'Mahmoud' AND last_name = 'Zughbor';
+-- it's runing wihtout safe update 
+
+-- using WHERE clause
+UPDATE users
+SET handle = 'mzug'
+WHERE id = 26;
+
+-- DELETE: remove the same user
+DELETE FROM users
+WHERE first_name = 'Mahmoud' AND last_name = 'Zughbor';
+

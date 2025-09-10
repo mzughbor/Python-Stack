@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Assignment: Counter using Django</title>
+  </head>
+  <body>
+    <h1>Counter App</h1>
+    <h2>You have visited this site {{ request.session.counter }} times</h2>
+
+    <a href="/destroy_session"><button>Destroy my session</button></a>
+
+    <a href="/add_two"><button>+2</button></a>
+    <a href="/reset"><button>reset</button></a>
+
+    <form action="/increment" method="POST">
+      {% csrf_token %}
+      <input type="number" name="howMany" placeholder="Enter number" required />
+      <button type="submit">increment</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+
+<h1>All Movies</h1>
+<ul>
+{% for movie in all_the_movies %}
+    <li>{{ movie.title }}</li>
+    <p>{{ movie.description }}</p>
+    <p>{{ movie.release_date }}</p>
+    <p>{{ movie.duration }}</p>
+{% endfor %}
+</ul>

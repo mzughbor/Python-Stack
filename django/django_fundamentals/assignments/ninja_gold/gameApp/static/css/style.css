@@ -1,0 +1,9 @@
+.text-area {
+    min-height: 200px;
+}
+
+.your-gold {
+    min-height: 40px;
+    width: 100px;
+    text-align: center;
+}

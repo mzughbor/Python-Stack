@@ -1,0 +1,62 @@
+-- 1 Countries that speak Slovene
+
+SELECT c.Name AS country, cL.Language, cL.Percentage
+FROM country c
+JOIN countrylanguage AS cL ON c.Code = cL.CountryCode
+WHERE cL.Language = 'Slovene'
+ORDER BY cL.Percentage DESC;
+
+-- 2 Each country's total number of cities
+
+SELECT c.Name AS country, COUNT(ci.ID) AS total_cities
+FROM country c
+JOIN city ci ON ci.CountryCode = c.Code
+GROUP BY c.Code
+ORDER BY total_cities DESC;
+
+-- 3 Cities in Mexico with population > 500,000
+-- 
+SELECT ci.Name AS city, ci.Population
+FROM city ci
+JOIN country c ON ci.CountryCode = c.Code
+WHERE c.Name = 'Mexico' AND ci.Population > 500000
+ORDER BY ci.Population DESC;
+
+-- 4 Languages in each country with percentage > 89%
+
+SELECT c.Name AS country, cL.Language, cL.Percentage
+FROM country c
+JOIN countrylanguage cL ON c.Code = cL.CountryCode
+WHERE cL.Percentage > 89
+ORDER BY cL.Percentage DESC;
+
+-- 5 Countries with surface area < 501 and population > 100,000
+
+SELECT Name, SurfaceArea, Population
+FROM country
+WHERE SurfaceArea < 501 AND Population > 100000;
+
+-- 6 Constitutional Monarchies with capital > 200 and life expectancy > 75
+
+SELECT Name, GovernmentForm, Capital, LifeExpectancy
+FROM country
+WHERE GovernmentForm = 'Constitutional Monarchy'
+  AND Capital > 200 AND LifeExpectancy > 75;
+
+-- 7 Cities in Argentina, Buenos Aires district, population > 500,000
+
+SELECT c.Name AS country, ci.Name AS city, ci.District, ci.Population
+FROM city ci
+JOIN country c ON ci.CountryCode = c.Code
+WHERE c.Name = 'Argentina'
+  AND ci.District = 'Buenos Aires' AND ci.Population > 500000
+ORDER BY ci.Population DESC;
+
+-- 8  Number of countries in each region
+
+SELECT Region, COUNT(*) AS num_countries
+FROM country
+GROUP BY Region
+ORDER BY num_countries DESC;
+
+

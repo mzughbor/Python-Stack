@@ -1,0 +1,83 @@
+>>> from dojo_ninjas_app.models import Dojo, Ninja
+
+>>> Dojo.objects.create(name="Malex",city="Badar",state="PO")
+>>> Dojo.objects.create(name="Kahild",city="Luxor",state="LU")
+>>> Dojo.objects.create(name="Sami",city="Shoag",state="SO")
+
+>>> dj1 = Dojo.objects.get(id=1)
+>>> dj2 = Dojo.objects.get(id=2)
+>>> dj3 = Dojo.objects.get(id=3)
+
+>>> dj1.delete()
+(1, {'dojo_ninjas_app.Dojo': 1})
+
+>>> dj2.delete()
+(1, {'dojo_ninjas_app.Dojo': 1})
+
+>>> dj3.delete()
+(1, {'dojo_ninjas_app.Dojo': 1})
+
+>>> Dojo.objects.all()
+<QuerySet []>
+
+>>> Dojo.objects.create(name="Ahmed",city="Qena",state="QE")
+>>> Dojo.objects.create(name="Mohammed",city="Monufia",state="MO")
+>>> Dojo.objects.create(name="Sharhan",city="10th of Ramadan",state="SH")
+
+>>> dj1 = Dojo.objects.get(id=4)
+>>> Ninja.objects.create(first_name="LittleNena", last_name="Zug01", dojo_name=dj1)
+>>> Ninja.objects.create(first_name="Shinobi", last_name="Zug02", dojo_name=dj1)
+>>> Ninja.objects.create(first_name="Kunoichi", last_name="Zug03", dojo_name=dj1)
+
+>>> dj1.ninjas.all()
+Out[5]: <QuerySet [<Ninja: <(1)> LittleNena Zug01 <(4)> Ahmed Qena QE>, <Ninja: <(2)> Shinobi Zug02 <(4)> Ahmed Qena QE>, <Ninja: <(3)> Kunoichi Zug03 <(4)> Ahmed Qena QE>]>
+
+>>> dj2 = Dojo.objects.get(id=5)
+>>> dj3 = Dojo.objects.get(id=6)
+
+>>> Ninja.objects.create(first_name="Sohanda", last_name="Ali", dojo_name=dj2)
+Out[8]: <Ninja: <(4)> Sohanda Ali <(5)> Mohammed Monufia MO>
+
+>>> Ninja.objects.create(first_name="Faris", last_name="Omar", dojo_name=dj2)
+Out[9]: <Ninja: <(5)> Faris Omar <(5)> Mohammed Monufia MO>
+
+>>> Ninja.objects.create(first_name="Laila", last_name="Hassan", dojo_name=dj2)
+Out[10]: <Ninja: <(6)> Laila Hassan <(5)> Mohammed Monufia MO>
+
+>>> dj2.ninjas.all()
+Out[11]: <QuerySet [<Ninja: <(4)> Sohanda Ali <(5)> Mohammed Monufia MO>, <Ninja: <(5)> Faris Omar <(5)> Mohammed Monufia MO>, <Ninja: <(6)> Laila Hassan <(5)> Mohammed Monufia MO>]>
+
+>>> Ninja.objects.create(first_name="Alice", last_name="Mo", dojo_name=dj3)
+>>> Ninja.objects.create(first_name="Noura", last_name="Yasmir", dojo_name=dj3)
+>>> Ninja.objects.create(first_name="Hala", last_name="Youssef", dojo_name=dj3)
+
+>>> dj1.ninjas.all()
+Out[13]: <QuerySet [<Ninja: <(1)> LittleNena Zug01 <(4)> Ahmed Qena QE>, <Ninja: <(2)> Shinobi Zug02 <(4)> Ahmed Qena QE>, <Ninja: <(3)> Kunoichi Zug03 <(4)> Ahmed Qena QE>]>
+
+>>> dj3.ninjas.all()
+Out[14]: <QuerySet [<Ninja: <(7)> Alice Mo <(6)> Sharhan 10th of Ramadan SH>, <Ninja: <(8)> Noura Yasmir <(6)> Sharhan 10th of Ramadan SH>, <Ninja: <(9)> Hala Youssef <(6)> Sharhan 10th of Ramadan SH>]>
+
+In [17]: Dojo.objects.last().ninjas.all()
+Out[17]: <QuerySet [<Ninja: <(7)> Alice Mo <(6)> Sharhan 10th of Ramadan SH>, <Ninja: <(8)> Noura Yasmir <(6)> Sharhan 10th of Ramadan SH>, <Ninja: <(9)> Hala Youssef <(6)> Sharhan 10th of Ramadan SH>]>
+
+In [18]: Dojo.objects.first().ninjas.all()
+Out[18]: <QuerySet [<Ninja: <(1)> LittleNena Zug01 <(4)> Ahmed Qena QE>, <Ninja: <(2)> Shinobi Zug02 <(4)> Ahmed Qena QE>, <Ninja: <(3)> Kunoichi Zug03 <(4)> Ahmed Qena QE>]>
+
+In [21]: last_ninja = Ninja.objects.last()
+
+In [22]: last_ninja.dojo_name
+Out[22]: <Dojo: <(6)> Sharhan 10th of Ramadan SH>
+In [23]: exit
+
+### after adding desc to Dojo model and run migrations again ...
+
+In [1]: from dojo_ninjas_app.models import Dojo
+
+In [2]: Dojo.objects.create(name="ZugDojo", city="Cairo", state="CA", desc="new dojo")
+
+Out[2]: <Dojo: <(7)> ZugDojo Cairo CA>
+
+In [3]: Dojo.objects.all()
+
+Out[3]: <QuerySet [<Dojo: <(4)> Ahmed Qena QE>, <Dojo: <(5)> Mohammed Monufia MO>, <Dojo: <(6)> Sharhan 10th of Ramadan SH>, <Dojo: <(7)> ZugDojo Cairo CA>]>
+

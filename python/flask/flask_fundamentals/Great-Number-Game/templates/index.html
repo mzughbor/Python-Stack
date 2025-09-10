@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Great Number Game</title>
+    <style>
+        h1 {
+            font-size: xx-large;
+        }
+        body { 
+            text-align: center;
+            margin-top: 50px;
+        }
+        .box {
+            font-size:large;
+            align-content: center;
+            margin: 20px auto;
+            padding: 20px;
+            width: 200px;
+            height: 200px;
+            border: solid black 2px;
+        }
+        .low { 
+            background-color: red;
+            color: white;
+        }
+        .high { 
+            background-color: blue;
+            color: white; 
+        }
+        .correct { 
+            background-color: green;
+            color: white;
+        }
+        .exceed {
+            background-color: gray;
+            color: white;            
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Great Number Game!</h1>
+    <p>I am thinking of a number between 1 and 100</p>
+
+    {% if not session.status %}
+        <form action="/guess" method="POST">
+            <input type="number" name="guess" required>
+            <button type="submit">Guess</button>
+        </form>
+    {% elif session.status == "low" %}
+        <div class="box low">Too Low!</div>
+        <form action="/guess" method="POST">
+            <input type="number" name="guess" required>
+            <button type="submit">Guess Again</button>
+        </form>
+    {% elif session.status == "high" %}
+        <div class="box high">Too High!</div>
+        <form action="/guess" method="POST">
+            <input type="number" name="guess" required>
+            <button type="submit">Guess Again</button>
+        </form>
+    {% elif session.status == "correct" %}
+        <div class="box correct">
+            Correct, you guessed it in {{ session.attempts }} attempts.
+        </div>
+        <a href="/reset">Play Again</a>
+    {% elif session.status == "exceed" %}
+        <div class="box exceed">
+            You Lose casue exceed max of 5 tries, plase start over again.
+        </div>
+        <a href="/reset">Play Again</a>        
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Details</title>
+    <style>
+      body,
+      .bg-white,
+      h1,
+      p,
+      strong,
+      a {
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Simple JavaScript to toggle dark mode
+      function toggleDarkMode() {
+        const html = document.documentElement;
+        html.classList.toggle("dark");
+      }
+    </script>
+  </head>
+  <body
+    class="bg-gray-100 dark:bg-gray-900 flex items-center justify-center min-h-screen p-4"
+  >
+    <div
+      class="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8"
+    >
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+        Submitted Info
+      </h1>
+
+      <div class="space-y-4 text-lg text-gray-800 dark:text-gray-200">
+        <p>
+          <strong>Name:</strong> {{ request.session.context.name_on_template }}
+        </p>
+        <p>
+          <strong>Dojo Location:</strong>
+          {{ request.session.context.location_on_template }}
+        </p>
+        <p>
+          <strong>Favorite Language:</strong>
+          {{ request.session.context.language_on_template }}
+        </p>
+        <p>
+          <strong>Marital Status:</strong>
+          {{ request.session.context.status_on_template }}
+        </p>
+        {% if request.session.context.comments_on_template %}
+        <p>
+          <strong>Comments:</strong>
+          {{ request.session.context.comments_on_template }}
+        </p>
+        {% endif %}
+        <p>
+          <strong>Notification Preference:</strong>
+          {{ request.session.context.notifications_on_template }}
+        </p>
+        <p>
+          <strong>Agreed to Terms:</strong>
+          {{ request.session.context.terms_on_template }}
+        </p>
+      </div>
+      <div class="mt-8">
+        <a
+          href="/"
+          class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-600 font-medium"
+        >
+          &larr; Go Back to Form
+        </a>
+      </div>
+
+      <div class="mt-8 flex justify-end space-x-3">
+        <a
+          href="{% url 'home' %}"
+          class="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200"
+        >
+          Back
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

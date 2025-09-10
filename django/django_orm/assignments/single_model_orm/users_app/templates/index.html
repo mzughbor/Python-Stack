@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>C+R Users</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row w-100">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="text-center">
+                    <h3>All the Users</h3>
+                </div>
+            
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="info">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr class="{% if forloop.counter|divisibleby:2 %}active{% endif %}">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.first_name }} {{ user.last_name }}</td>
+                            <td>{{ user.email_address }}</td>
+                            <td>{{ user.age }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="m-4">
+                    <hr class="border-top border-primary my-3">
+                </div>
+            
+                <h3 class="text-center mb-4">Add a User</h3>
+                <br>
+                <form action="/create_user" method="POST" class="p-4 border rounded shadow-sm">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="first_name" class="form-label">First Name</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input required type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name"  autocomplete="given-name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="last_name" class="form-label">Last Name</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input required type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name" autocomplete="family-name">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="email" class="form-label">Email</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input required type="email" class="form-control" name="email_address" id="email" placeholder="Enter email" autocomplete="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="age" class="form-label">Age</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input required type="number" class="form-control" name="age" id="age" placeholder="Enter age" autocomplete="off" min="0" max="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- old shape like line by labels and line by inputs -->
+                    <!--
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="email_address" class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email_address" placeholder="Enter email">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" class="form-control" name="age" placeholder="Enter age">
+                            </div>
+                        </div>
+                    -->                
+                    
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-4">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
