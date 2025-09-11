@@ -1,0 +1,162 @@
+8 objects imported automatically (use -v 2 for details).
+
+Python 3.11.7 (main, Dec 15 2023, 18:12:31) [GCC 11.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_authors_app.models import Author, Book
+>>> 
+>>> 
+>>> book_to_add = ['C Sharp', 'Java', 'Python', 'php', 'Ruby']
+>>> general_desc = "Technical Books"
+>>>
+>>>
+>>> for book in book_to_add: Book.objects.create(title=book, desc=general_desc)
+... 
+<Book: Bookid-1-Title: C Sharp
+Technical Books
+>
+<Book: Bookid-2-Title: Java
+Technical Books
+>
+<Book: Bookid-3-Title: Python
+Technical Books
+>
+<Book: Bookid-4-Title: php
+Technical Books
+>
+<Book: Bookid-5-Title: Ruby
+Technical Books
+>
+>>> authors = ['Jane Austen', 'Emily Dickinson', 'Fyodor Dostoevsky', 'William Shakespeare', 'Lau Tzu']
+>>> for each_author in authors:
+...     name_parts = each_author.split()
+...     firstname = name_parts[0]
+...     lastname = name_parts[-1]
+...     Author.objects.create(first_name=firstname, last_name=lastname)
+... 
+<Author: AuthID:1- Name: Jane Austen
+books_authors_app.Book.None>
+<Author: AuthID:2- Name: Emily Dickinson
+books_authors_app.Book.None>
+<Author: AuthID:3- Name: Fyodor Dostoevsky
+books_authors_app.Book.None>
+<Author: AuthID:4- Name: William Shakespeare
+books_authors_app.Book.None>
+<Author: AuthID:5- Name: Lau Tzu
+books_authors_app.Book.None>
+>>>
+>>>
+>>>
+>>> Book.objects.all()
+<QuerySet [<Book: Bookid-1-Title: C Sharp
+Technical Books
+>, <Book: Bookid-2-Title: Java
+Technical Books
+>, <Book: Bookid-3-Title: Python
+Technical Books
+>, <Book: Bookid-4-Title: php
+Technical Books
+>, <Book: Bookid-5-Title: Ruby
+Technical Books
+>]>
+>>>
+>>>
+>>>
+>>> b1 = Book.objects.get(id=1)
+>>> b1.title = "C#"
+>>> b1.save()
+>>> 
+>>> 
+>>> 
+>>> Book.objects.first()
+<Book: Bookid-1-Title: C#
+Technical Books
+>
+>>> 
+>>> 
+>>> a4 = Author.objects.get(id=4)
+>>> a4.first_name  = "Bill"
+>>> a4.save()
+>>> 
+>>> 
+>>> Author.objects.filter(first_name = "Bill")
+<QuerySet [<Author: AuthID:4- Name: Bill Shakespeare
+books_authors_app.Book.None>]>
+>>> 
+>>> 
+>>> b2 = Book.objects.get(id=2)
+>>> author1 = Author.objects.first()
+>>> author1.books.add(b1, b2)
+>>> 
+>>> >>> 
+>>> auther2 = Author.objects.get(id=2)
+>>> b3 = Book.objects.get(id=3)
+>>> author2 = Author.objects.get(id=2)
+>>> author2.books.add(b1, b2, b3)
+>>> 
+>>> 
+>>> b4 = Book.objects.get(id=4)
+>>> author3 = Author.objects.get(id=3)
+>>> author3.books.add(b1, b2, b3, b4)
+>>> 
+>>> 
+>>> Book.objects.all()
+<QuerySet [<Book: Bookid-1-Title: C#
+Technical Books
+>, <Book: Bookid-2-Title: Java
+Technical Books
+>, <Book: Bookid-3-Title: Python
+Technical Books
+>, <Book: Bookid-4-Title: php
+Technical Books
+>, <Book: Bookid-5-Title: Ruby
+Technical Books
+>]>
+>>> b5 = Book.objects.get(id=5)
+>>> 
+>>> author4 = Author.objects.get(id=4)
+>>> author4.books.add(b1, b2, b3, b4, b5)
+>>> 
+>>> 
+>>> allBooks = Book.objects.all()
+>>> author4.books.add(*allBooks)
+>>> 
+>>> 
+>>> a_b3 = b3.authors.all()
+>>> 
+>>> print(a_b3)
+<QuerySet [<Author: AuthID:2- Name: Emily Dickinson
+books_authors_app.Book.None>, <Author: AuthID:3- Name: Fyodor Dostoevsky
+books_authors_app.Book.None>, <Author: AuthID:4- Name: Bill Shakespeare
+books_authors_app.Book.None>]>
+>>> 
+>>> 
+>>> for author in a_b3: print(author.first_name, author.last_name)
+... 
+Emily Dickinson
+Fyodor Dostoevsky
+Bill Shakespeare
+>>> 
+>>> 
+>>> 
+>>> author1.books.remove(b1)
+>>> 
+>>> author5 = Author.objects.get(id=5)
+>>> author5.books.add(b2)
+>>> 
+>>> 
+>>> print(Book.objects.filter(authors=author3))
+<QuerySet [<Book: Bookid-1-Title: C#
+Technical Books
+>, <Book: Bookid-2-Title: Java
+Technical Books
+>, <Book: Bookid-3-Title: Python
+Technical Books
+>, <Book: Bookid-4-Title: php
+Technical Books
+>]>
+>>> print(b5.authors.all())
+<QuerySet [<Author: AuthID:4- Name: Bill Shakespeare
+books_authors_app.Book.None>]>
+>>> 
+>>> 
