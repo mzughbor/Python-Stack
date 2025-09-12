@@ -220,6 +220,8 @@ elif request.POST['which_form'] == 'login':
 =================================================================
 ============ Django Object Relational Mapper (ORM) ==============
 =================================================================
+In Django, you use .create() to add a new object to the database and .add() to create a relationship between existing objects in a Many-to-Many field.
+
 
 --Ex:
 from django.db import models
@@ -351,6 +353,9 @@ newly_created_movie = Movie.objects.create(
 -----------------------------------------------------------------
 ----------- One to Many Relationships ---------------------------
 -----------------------------------------------------------------
+In Django, you use .create() to add a new object to the database and .add() to create a relationship between existing objects in a Many-to-Many field.
+
+#ForeignKey (= one-to-many)
 
 -- One to Many Relationships >> ORM  >>  #it's about Here >> ForeignKey()
 
@@ -425,7 +430,7 @@ book_project/apps/books/templates/index.html
 </ul>
 
 =================================================================
--- Many to Many Relationships >>  ORM  >> 
+-- [Many to Many Relationships] >>  [ORM]  >> 
 	#it's about Here >> models.ManyToManyField(Table_1,related_name="reverse_back_way.."
 
 class Book(models.Model):
@@ -445,7 +450,11 @@ class Publisher(models.Model):
 -- The model would still work if the Book model had a field named publishers instead (though we would need to put the Publisher class first)...
 
 =================================================================
--- [Many to Many Relationships] -- adding relationship
+-- [Many to Many Relationships]-- 
+-- doing forget that the .create() used to add a new object to the database while the >> .add() mthod is to create a relationship between existing objects in a Many-to-Many field...
+----
+
+-- adding relationship  
 
 -- Adding a relationship between two existing records is simple:
 
@@ -468,7 +477,7 @@ this_publisher = Publisher.objects.get(id=2)    # retrieve an instance of a publ
     
 -- There is 2 options that do the same thing:
 
-this_publisher.books.remove(this_book)        # remove the book from this publisher's list of books
+this_publisher.books.remove(this_book)         # remove the book from this publisher's list of books
 --OR
 this_book.publishers.remove(this_publisher)    # remove the publisher from this book's list of publishers
 
@@ -477,26 +486,270 @@ this_book.publishers.remove(this_publisher)    # remove the publisher from this 
 
 ----
 this_publisher.books.all()    # get all the books this publisher is publishing
-this_book.publishers.all()    # get all the publishers for this bookcopy
+this_book.publishers.all()    # get all the publishers for this book
 
 -- in views >> Remember to leave off the parentheses when referring to this collection in your template: this_publisher.books.all.
 
 =================================================================
+=================================================================
+=================================================================
+
+--[ORM Review] Page...
+-- OneToOneField (= one-to-one) relationship...
+-- One to one >> OneToOneField() in Django > It’s like a ForeignKey, but instead of “one user → many related objects,” it means one user → one related object only.  >> related_name="??" >> used to rename the reverse link, the default reverse relationship...
+----
+
+This makes an imaginary property IN THE OBJECT THAT THE ONE_TO_ONE relationship is not defined in, in addition to the real property in the object in which the ties are defined. So if we had a one_to_one relationship in an object, e.g.
+
+class User(models.Model):
+	first_name = models.CharField(max_length=45)
+class CustomUserId(models.Model):
+    newId = models.IntegerField()
+    specificUser = models.OneToOneField(User)
+
+Here, a userObject has a customUserId, and a customUserId has a specificUser property. If we want to change the way we reference that artificially generated key, we could change our model like this:
+
+class User(models.Model):
+    first_name = models.CharField(max_length=45)
+class CustomUserId(models.Model):
+    newId = models.IntegerField()
+    specificUser = models.OneToOneField(User, related_name="myId")
+
+Now, the User object would reference the CustomUserId objects by user object.myId (and then maybe .newId if you wanted to get that integer stored in new)
+
+-----------------------------------------------------------------
++ ---  ---- ---+
+| Explanation :|
++ ---  ---- ---+
+
+-OneToOneField in django it means one user → one related object only.
+
+-The default reverse relationship
+-ex
+
+class User(models.Model):
+    first_name = models.CharField(max_length=45)
+
+class CustomUserId(models.Model):
+    newId = models.IntegerField()
+    specificUser = models.OneToOneField(User, on_delete=models.CASCADE)
+
+----
+-From CustomUserId, you can access the linked User:
+
+custom_id = CustomUserId.objects.get(id=1)
+print(custom_id.specificUser.first_name)
+
+----
+-From User, you also automatically get a way to access its CustomUserId. Django creates this reverse link for you (unless you disable it). By default, the name is based on the model name:
+
+user = User.objects.get(id=1)
+print(user.customuserid.newId)  # auto-created reverse relation
+# Notice >> the lowercase customuserid — Django builds this name automatically.
+
+----
+-latest thing like ex in our matierls
+-Using related_name to rename the reverse link
+
+-If you don’t like customuserid (maybe it’s too long or unclear), you can customize it:
+
+class CustomUserId(models.Model):
+    newId = models.IntegerField()
+    specificUser = models.OneToOneField(User, on_delete=models.CASCADE, related_name="myId")
+
+-Now you can do:
+
+user = User.objects.get(id=1)
+print(user.myId.newId)  # cleaner than user.customuserid.newId
+----
+
+-- So, Where/when do you use this?
+
+-You’ll use OneToOneField in cases where you want to extend a model with extra information without modifying the base table directly.
+
+--Examples01: Adding a profile to a built-in User:
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField()
+    birth_date = models.DateField()
+
+## → Access it as user.profile (or user.my_profile if you set related_name).
+
+--Example02: Storing a unique ID card / passport for each user:
+
+class Passport(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="passport")
+    number = models.CharField(max_length=20)
+
+## → Access it as user.passport.number.
+
+-----------------------------------------------------------------
+++++ >> Extra Explanation to look at it using sql ?!
+----
+-In Django, a OneToOneField is basically: --> A ForeignKey with unique=True.
+-That means: each row in table A can connect to only one row in table B, and vice versa.
+-So it’s like a special kind of ForeignKey.
+----
+-What it looks like in SQL / Using our main example:
+
+class User(models.Model):
+    first_name = models.CharField(max_length=45)
+
+class CustomUserId(models.Model):
+    newId = models.IntegerField()
+    specificUser = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
+#Django will generate two tables:
+#SQL
+
+User table:
+
+CREATE TABLE user (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(45)
+);
 
 
+CustomUserId table:
+
+CREATE TABLE custom_user_id (
+    id SERIAL PRIMARY KEY,
+    newId INTEGER,
+    specificUser_id INTEGER UNIQUE REFERENCES user(id) ON DELETE CASCADE
+);
 
 
+## Notice the important part:
 
+## specificUser_id INTEGER UNIQUE REFERENCES user(id)
 
+# That UNIQUE constraint is what makes it one-to-one instead of many-to-one.
 
+-----------------------------------------------------------------
 
+🔹 ForeignKey (one-to-many)  .. """name_of_class_small_latters + _set""" || related_name=" " attribute  
+
+-- you can use >> User.objects.message_set.all() >> in case we don't have related_name="messages" defined in the user property in Message Class... 
+
+-- or if it's existes we can say >> User.objects.messages.all()
+
+- Ex:/
+
+  class User(models.Model):
+      first_name = models.CharField(max_length=200)
+      last_name = models.CharField(max_length=200)
+      email = models.EmailField()
+      password = models.CharField(max_length=200)
+      created_at = models.DateTimeField(auto_now_add=True)
+      updated_at = models.DateTimeField(auto_now=True)
+
+  class Message(models.Model):
+      message = models.TextField()
+      user = models.ForeignKey(User, related_name="messages")
+      created_at = models.DateTimeField(auto_now_add=True)
+      updated_at = models.DateTimeField(auto_now=True)
+
+  class Comment(models.Model):
+      comment = models.TextField()
+      user = models.ForeignKey(User)
+      message = models.ForeignKey(Message)
+      created_at = models.DateTimeField(auto_now_add=True)
+      updated_at = models.DateTimeField(auto_now=True)
 
 =================================================================
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ externial-for-now
+----
 
-=================================================================
+-- self-referential relationship (a table pointing to itself).  --> it can come with one-to-one and one-to-many and with many to many .. / below we have three examples...
+
+-Ex01:\  # Employee → Manager (classic example) # one to many
+
+class Employee(models.Model):
+    name = models.CharField(max_length=50)
+    manager = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="team_members"
+    )
+
+## Why? >> Each employee can have one manager. >> Each manager can have many employees (team members). >> This models a company hierarchy.
+
+-- Ex01 (continued) :\
+
+boss = Employee.objects.create(name="Alice")
+worker1 = Employee.objects.create(name="Bob", manager=boss)
+worker2 = Employee.objects.create(name="Charlie", manager=boss)
+
+print(boss.team_members.all())  # [Bob, Charlie]
+print(worker1.manager.name)     # Alice
+
+-----
+
+-Ex02:\  # Friends or Relationships (social networks) # one to one
+
+class Person(models.Model):
+    name = models.CharField(max_length=50)
+    best_friend = models.OneToOneField(
+        "self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+-- Why? #Each person can have at most one best friend, who is also a Person.
+
+-- Ex02 (continued) :\
+alice = Person.objects.create(name="Alice")
+bob = Person.objects.create(name="Bob", best_friend=alice)
+
+print(bob.best_friend.name)   # Alice
+
+-----
+
+# many to many Ex:\  # ManyToManyField("self") means a row can connect to many rows of the same table.
+# Notice ... By default, this is **not symmetrical** (so if Alice is Bob’s friend, Bob is not automatically Alice’s friend).
+
+class Person(models.Model):
+    name = models.CharField(max_length=50)
+    friends = models.ManyToManyField("self", blank=True)
+
+alice = Person.objects.create(name="Alice")
+bob = Person.objects.create(name="Bob")
+charlie = Person.objects.create(name="Charlie")
+
+alice.friends.add(bob)      # Alice → Bob
+alice.friends.add(charlie)  # Alice → Charlie
+
+print(alice.friends.all())  # [Bob, Charlie]
+print(bob.friends.all())    # []  (not automatically reciprocal!)
+
+----
+
+# Let's see >> symmetrical=True ??
+
+class Person(models.Model):
+    name = models.CharField(max_length=50)
+    friends = models.ManyToManyField("self", symmetrical=True, blank=True)
+
+alice.friends.add(bob)
+print(alice.friends.all())  # [Bob]
+print(bob.friends.all())    # [Alice] > auto reciprocal
+
+
+# 🔹 Real-life use cases...
+-Social network friends → symmetrical=True (friendship is mutual).
+-Followers system (Twitter/Instagram) → symmetrical=False.
+-Related articles/products (an article can be related to many other articles).
+
+-----------------------------------------------------------------
+
+
+
 
 
 =================================================================
