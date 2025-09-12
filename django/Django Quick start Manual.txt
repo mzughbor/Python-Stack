@@ -6,10 +6,8 @@
 =================================================================
 
 - to activate your Virtual Environment do this.
-source djangoPy3Env/bin/activate   # "djangoPy3Env" it's the name for VE you created before.
--
-cd '/media/mzug/Save-Data/pythonStack/my_environments'
-source djangoPy3Env/bin/activate **
+
+source ~/djangoSysEnv/bin/activate
 
 =========================
 
@@ -658,105 +656,61 @@ CREATE TABLE custom_user_id (
       created_at = models.DateTimeField(auto_now_add=True)
       updated_at = models.DateTimeField(auto_now=True)
 
+-----------------------------------------------------------------
+
+--Advanced Queries (optional)
+
+Entry.objects.exclude(pub_date__gt=datetime.date(2005, 1, 3), headline='Hello') 
+#__gt Means greater than.
+
+-- for seach bar or smth...
+lil_books = Book.objects.filter(title__startswith="Little")
+books = Book.objects.filter(author__name="Louise May Alcott")
+books = Book.objects.filter(author__name__contains="Al")
+
+
+=================================================================
+# Django with Postgres / connecting and creating new db, follow below:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'first_postgres_db',
+        'USER': 'postgres',
+        'PASSWORD': 'testalicealice',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
 =================================================================
 
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ externial-for-now
-----
+-- Commands to use after inter  psql
 
--- self-referential relationship (a table pointing to itself).  --> it can come with one-to-one and one-to-many and with many to many .. / below we have three examples...
+go terminal to > psql
 
--Ex01:\  # Employee → Manager (classic example) # one to many
+CREATE DATABASE db_name_is;
 
-class Employee(models.Model):
-    name = models.CharField(max_length=50)
-    manager = models.ForeignKey(
-        "self",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="team_members"
-    )
+\c db_name_is			# to connect to db 
 
-## Why? >> Each employee can have one manager. >> Each manager can have many employees (team members). >> This models a company hierarchy.
+now in another bash/terminal >> python manage.py migrate 
 
--- Ex01 (continued) :\
-
-boss = Employee.objects.create(name="Alice")
-worker1 = Employee.objects.create(name="Bob", manager=boss)
-worker2 = Employee.objects.create(name="Charlie", manager=boss)
-
-print(boss.team_members.all())  # [Bob, Charlie]
-print(worker1.manager.name)     # Alice
-
------
-
--Ex02:\  # Friends or Relationships (social networks) # one to one
-
-class Person(models.Model):
-    name = models.CharField(max_length=50)
-    best_friend = models.OneToOneField(
-        "self",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True
-    )
-
--- Why? #Each person can have at most one best friend, who is also a Person.
-
--- Ex02 (continued) :\
-alice = Person.objects.create(name="Alice")
-bob = Person.objects.create(name="Bob", best_friend=alice)
-
-print(bob.best_friend.name)   # Alice
-
------
-
-# many to many Ex:\  # ManyToManyField("self") means a row can connect to many rows of the same table.
-# Notice ... By default, this is **not symmetrical** (so if Alice is Bob’s friend, Bob is not automatically Alice’s friend).
-
-class Person(models.Model):
-    name = models.CharField(max_length=50)
-    friends = models.ManyToManyField("self", blank=True)
-
-alice = Person.objects.create(name="Alice")
-bob = Person.objects.create(name="Bob")
-charlie = Person.objects.create(name="Charlie")
-
-alice.friends.add(bob)      # Alice → Bob
-alice.friends.add(charlie)  # Alice → Charlie
-
-print(alice.friends.all())  # [Bob, Charlie]
-print(bob.friends.all())    # []  (not automatically reciprocal!)
-
-----
-
-# Let's see >> symmetrical=True ??
-
-class Person(models.Model):
-    name = models.CharField(max_length=50)
-    friends = models.ManyToManyField("self", symmetrical=True, blank=True)
-
-alice.friends.add(bob)
-print(alice.friends.all())  # [Bob]
-print(bob.friends.all())    # [Alice] > auto reciprocal
-
-
-# 🔹 Real-life use cases...
--Social network friends → symmetrical=True (friendship is mutual).
--Followers system (Twitter/Instagram) → symmetrical=False.
--Related articles/products (an article can be related to many other articles).
+\dt			# if you like to see tables just created after migrate done.
 
 -----------------------------------------------------------------
 
+# Django with MYSQL / connecting and creating new db, follow below:
 
-
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'dojo_ninja_db',
+		'USER': 'root',
+		'PASSWORD': 'alicealice',
+		'HOST': 'localhost',
+		'PORT': '3306',
+	}
+}
 
 
 =================================================================
-
-
-=================================================================
-
-
-=================================================================
-

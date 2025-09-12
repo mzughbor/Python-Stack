@@ -1,0 +1,151 @@
+Perfect 👌 you caught the **most practical piece of the ORM**: traversing relationships with `__` lookups (which is really JOINs under the hood). Let’s build a **complete mini Django example** around your search-bar-like queries.
+
+---
+
+# 🔹 Models (models.py)
+
+We’ll keep it simple:
+
+* An `Author` can write many `Book`s (**one-to-many**).
+* Each `Book` has a title and points back to its `Author`.
+
+```python
+from django.db import models
+
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
+
+    def __str__(self):
+        return f"{self.title} by {self.author.name}"
+```
+
+---
+
+# 🔹 Example Data (shell)
+
+```python
+# Create authors
+louise = Author.objects.create(name="Louise May Alcott")
+tolkien = Author.objects.create(name="J.R.R. Tolkien")
+
+# Create books
+Book.objects.create(title="Little Women", author=louise)
+Book.objects.create(title="Little Men", author=louise)
+Book.objects.create(title="The Hobbit", author=tolkien)
+Book.objects.create(title="The Lord of the Rings", author=tolkien)
+```
+
+---
+
+# 🔹 Example Queries
+
+### 1. Find books whose title starts with "Little"
+
+```python
+lil_books = Book.objects.filter(title__startswith="Little")
+for book in lil_books:
+    print(book)
+```
+
+👉 SQL:
+
+```sql
+SELECT * FROM book
+WHERE title LIKE 'Little%';
+```
+
+---
+
+### 2. Find all books written by "Louise May Alcott"
+
+```python
+books_by_louise = Book.objects.filter(author__name="Louise May Alcott")
+for book in books_by_louise:
+    print(book)
+```
+
+👉 SQL:
+
+```sql
+SELECT b.*
+FROM book b
+JOIN author a ON b.author_id = a.id
+WHERE a.name = 'Louise May Alcott';
+```
+
+---
+
+### 3. Find all books where author’s name contains “Al”
+
+```python
+books = Book.objects.filter(author__name__contains="Al")
+for book in books:
+    print(book)
+```
+
+👉 SQL:
+
+```sql
+SELECT b.*
+FROM book b
+JOIN author a ON b.author_id = a.id
+WHERE a.name LIKE '%Al%';
+```
+
+---
+
+# 🔹 How this connects to your "search bar idea"
+
+* A search bar usually takes some input (`q`) from the user.
+* Then you filter using `__contains`, `__icontains`, or `__startswith`.
+
+Example (views.py):
+
+```python
+from django.shortcuts import render
+from .models import Book
+
+def search_books(request):
+    query = request.GET.get("q", "")
+    results = Book.objects.filter(title__icontains=query)
+    return render(request, "search.html", {"results": results, "query": query})
+```
+
+Template (search.html):
+
+```html
+<form method="get">
+  <input type="text" name="q" value="{{ query }}" placeholder="Search books...">
+  <button type="submit">Search</button>
+</form>
+
+<ul>
+  {% for book in results %}
+    <li>{{ book.title }} by {{ book.author.name }}</li>
+  {% empty %}
+    <li>No results found.</li>
+  {% endfor %}
+</ul>
+```
+
+---
+
+✅ This is a **complete cycle**:
+
+1. Models (`Author`, `Book`)
+2. Data (`Louise May Alcott`, `Little Women`)
+3. Queries with `__startswith`, `__contains`, `author__name` (JOINs!)
+4. Optional: search view + template.
+
+---
+
+👉 Do you want me to also show you how to **expand this search bar** so it can look up both **titles** and **author names** at the same time (like a real-world book search)?
+
