@@ -26,7 +26,7 @@ python manage.py startapp app_name
 =========================
 
 -now go to your urls.py file same place/dir and add the path for the app in urlpatterns array 
-path('', include('app_name.urls')) # don't forget to import the include
+path('', include('?app????????????_name.urls')) # don't forget to import the include
 
 =========================
 
@@ -714,3 +714,79 @@ DATABASES = {
 
 
 =================================================================
+
+# Adding Validations  +  Pattern Validation
+
+# No methods in our new manager should ever receive the whole request object as an argument! 
+# (just parts, like request.POST)
+
+----
+# Inside your app's models.py file
+# imports...
+
+import re    # the regex module
+
+class BlogManager(models.Manager):
+    def basic_validator(self, postData):
+        errors = {}
+        
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData['email']):
+            errors['email'] = "Invalid email address!"        
+        
+        
+        if len(postData['name']) < 5:
+            errors["name"] = "Blog name should be at least 5 characters"
+        if len(postData['desc']) < 10:
+            errors["desc"] = "Blog description should be at least 10 characters"
+        return errors
+        
+
+class Blog(models.Model):
+    name = models.CharField(max_length=255)
+    desc = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = BlogManager()    # add this line!
+    
+----
+
+-- Now in our views.py File, we can use Blog.objects.basic_validator(postData):
+
+# Inside your app's views.py file
+
+from django.shortcuts import render, HttpResponse, redirect
+from django.contrib import messages
+from .models import Blog
+
+def update(request, id):
+    errors = Blog.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/blog/edit/'+id)
+    else:
+        blog = Blog.objects.get(id = id)
+        blog.name = request.POST['name']
+        blog.desc = request.POST['desc']
+        blog.save()
+        messages.success(request, "Blog successfully updated")
+        return redirect('/blogs')
+
+
+----
+# Inside your template .html file, that one containing the form add the ...
+
+{% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+----
+
+
+
