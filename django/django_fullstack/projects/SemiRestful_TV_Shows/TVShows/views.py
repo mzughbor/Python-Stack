@@ -1,18 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.utils import timezone
 from .models import TVShow
-# after doing ajax..
 from django.http import JsonResponse
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.shortcuts import get_object_or_404
-from .forms import TVShowForm
+
 
 def ajax_create_show(request):
     if request.method == "POST":
         errors = TVShow.objects.basic_validator(request.POST)
-        if errors:
+        if errors:  # validation failed
             return JsonResponse({"errors": errors}, status=400)
 
         show = TVShow.objects.create(
@@ -21,25 +16,39 @@ def ajax_create_show(request):
             release_date=request.POST["release_date"],
             desc=request.POST["desc"],
         )
-        return JsonResponse({"message": "Created successfully", "id": show.id})
+
+        return JsonResponse({
+            "id": show.id,
+            "title": show.title,   # ✅ include title to fix "Saved: undefined"
+        })
 
     return JsonResponse({"error": "Invalid request"}, status=405)
 
 
-def ajax_update_show(request, pk):
+def ajax_update_show(request, id):
+    show = get_object_or_404(TVShow, id=id)
+
     if request.method == "POST":
-        errors = TVShow.objects.basic_validator(request.POST, instance_id=pk)
-        if errors:
+        # Make a mutable copy of POST and add the show_id
+        post_data = request.POST.copy()
+        post_data['show_id'] = str(id)
+
+        errors = TVShow.objects.basic_validator(post_data)
+        if errors:  # validation failed
             return JsonResponse({"errors": errors}, status=400)
 
-        show = get_object_or_404(TVShow, id=pk)
+        # If no errors, update fields
         show.title = request.POST["title"]
         show.network = request.POST["network"]
         show.release_date = request.POST["release_date"]
         show.desc = request.POST["desc"]
         show.save()
 
-        return JsonResponse({"message": "Updated successfully", "id": show.id})
+        return JsonResponse({
+            "message": "Updated successfully",
+            "id": show.id,
+            "title": show.title,
+        })
 
     return JsonResponse({"error": "Invalid request"}, status=405)
 
@@ -95,11 +104,11 @@ def update(request, id):
     show = TVShow.objects.get(id=id)
     if request.method == 'POST':
         
-        # Create a copy of POST data to add show_id so we git rid of error duplicated with current one...
+        # Create a copy of POST data to add pk so we git rid of error duplicated with current one...
         post_data = request.POST.copy()
-        post_data['show_id'] = id
+        post_data['pk'] = id
         
-        # Run validations with show_id included
+        # Run validations with pk included
         errors = TVShow.objects.basic_validator(post_data)
         if len(errors) > 0:
             for key, value in errors.items():

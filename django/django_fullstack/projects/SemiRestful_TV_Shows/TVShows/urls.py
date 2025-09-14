@@ -13,9 +13,6 @@ urlpatterns = [
 
 
     path('shows/ajax/create/', views.ajax_create_show, name='ajax_create_show'),
-    path('shows/ajax/update/<int:pk>/', views.ajax_update_show, name='ajax_update_show'),
+    path('shows/ajax/update/<int:id>/', views.ajax_update_show, name='ajax_update_show'),
 
 ]
-
-#   path('ajax/create/', views.ajax_create_show, name='ajax_create_show'),
-#   path('ajax/update/<int:pk>/', views.ajax_update_show, name='ajax_update_show'),

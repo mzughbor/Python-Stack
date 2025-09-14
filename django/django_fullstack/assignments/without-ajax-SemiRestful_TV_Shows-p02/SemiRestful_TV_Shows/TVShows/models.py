@@ -12,8 +12,7 @@ class TVShowManager(models.Manager):
         if len(postData['title']) < 2:
             errors["title"] = "Title input should be at least 2 characters!"
         else:
-            # Check for duplicate titles, excluding the current TvShow being edited now by
-            # .. the flag we add show_id in request
+            # Check for duplicate titles, excluding the current show being edited by the flag show_id
             show_id = postData.get('show_id')
             exists = TVShow.objects.filter(title=postData['title'])
             if show_id:

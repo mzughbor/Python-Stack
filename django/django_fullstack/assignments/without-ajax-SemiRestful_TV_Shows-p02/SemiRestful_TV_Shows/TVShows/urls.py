@@ -10,12 +10,4 @@ urlpatterns = [
     path('shows/<int:id>/edit', views.edit),
     path('shows/<int:id>/update', views.update), # POST route
     path('shows/<int:id>/destroy', views.destroy), # POST route
-
-
-    path('shows/ajax/create/', views.ajax_create_show, name='ajax_create_show'),
-    path('shows/ajax/update/<int:pk>/', views.ajax_update_show, name='ajax_update_show'),
-
 ]
-
-#   path('ajax/create/', views.ajax_create_show, name='ajax_create_show'),
-#   path('ajax/update/<int:pk>/', views.ajax_update_show, name='ajax_update_show'),

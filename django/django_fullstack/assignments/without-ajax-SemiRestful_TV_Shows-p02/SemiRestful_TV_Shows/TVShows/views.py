@@ -2,47 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils import timezone
 from .models import TVShow
-# after doing ajax..
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.shortcuts import get_object_or_404
-from .forms import TVShowForm
-
-def ajax_create_show(request):
-    if request.method == "POST":
-        errors = TVShow.objects.basic_validator(request.POST)
-        if errors:
-            return JsonResponse({"errors": errors}, status=400)
-
-        show = TVShow.objects.create(
-            title=request.POST["title"],
-            network=request.POST["network"],
-            release_date=request.POST["release_date"],
-            desc=request.POST["desc"],
-        )
-        return JsonResponse({"message": "Created successfully", "id": show.id})
-
-    return JsonResponse({"error": "Invalid request"}, status=405)
-
-
-def ajax_update_show(request, pk):
-    if request.method == "POST":
-        errors = TVShow.objects.basic_validator(request.POST, instance_id=pk)
-        if errors:
-            return JsonResponse({"errors": errors}, status=400)
-
-        show = get_object_or_404(TVShow, id=pk)
-        show.title = request.POST["title"]
-        show.network = request.POST["network"]
-        show.release_date = request.POST["release_date"]
-        show.desc = request.POST["desc"]
-        show.save()
-
-        return JsonResponse({"message": "Updated successfully", "id": show.id})
-
-    return JsonResponse({"error": "Invalid request"}, status=405)
-
 
 # Create your views here.
 def root(request):
