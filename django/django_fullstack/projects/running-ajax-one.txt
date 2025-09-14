@@ -1,1 +1,7 @@
 fixed - ajax sending one is that
+
+but, it's not recommended approach
+
+needs more work to be good...
+
+:)
