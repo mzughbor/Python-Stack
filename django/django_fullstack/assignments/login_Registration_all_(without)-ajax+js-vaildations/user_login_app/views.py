@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from .models import User
 from django.contrib import messages
 import bcrypt
 import datetime
-import re
 
 # Create your views here.
 
@@ -91,38 +90,3 @@ def success(request):
         'action': request.session['action']
     }
     return render(request, "success.html", context)
-
-def check_email(request):
-    """AJAX view to check email uniqueness and format"""
-    if request.method == 'POST':
-        email = request.POST.get('email', '').strip()
-        
-        # Email format validation
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$')
-        
-        if not email:
-            return JsonResponse({
-                'valid': False,
-                'message': 'Email is required.',
-                'color': 'red'
-            })
-        elif not EMAIL_REGEX.match(email):
-            return JsonResponse({
-                'valid': False,
-                'message': 'Please enter a valid email format.',
-                'color': 'red'
-            })
-        elif User.objects.filter(email=email).exists():
-            return JsonResponse({
-                'valid': False,
-                'message': 'This email is already registered.',
-                'color': 'red'
-            })
-        else:
-            return JsonResponse({
-                'valid': True,
-                'message': 'Email is available!',
-                'color': 'green'
-            })
-    
-    return JsonResponse({'error': 'Invalid request'})

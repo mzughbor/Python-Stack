@@ -44,7 +44,6 @@
                                 <label for="reg-email" class="col-sm-3 col-form-label">Email: </label>
                                 <div class="col-sm-9">
                                     <input required type="email" class="form-control" id="reg-email" name="email" placeholder="Enter your email address" autocomplete="email">
-                                    <div id="email-validation-message" class="mt-1" style="display: none;"></div>
                                 </div>
                             </div>
 
@@ -111,63 +110,5 @@
         <hr class="my-5">
 
     </div>
-
-    <script>
-        // AJAX Email Validation
-        let emailTimeout;
-        const emailInput = document.getElementById('reg-email');
-        const emailMessage = document.getElementById('email-validation-message');
-
-        emailInput.addEventListener('input', function() {
-            // Clear previous timeout
-            clearTimeout(emailTimeout);
-            
-            // Hide message while typing
-            emailMessage.style.display = 'none';
-            
-            // Set new timeout for 3 seconds
-            emailTimeout = setTimeout(function() {
-                const email = emailInput.value.trim();
-                
-                if (email.length > 0) {
-                    // Make AJAX request
-                    fetch('/check-email/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-                        },
-                        body: 'email=' + encodeURIComponent(email)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        // Show validation message
-                        emailMessage.style.display = 'block';
-                        emailMessage.textContent = data.message;
-                        emailMessage.style.color = data.color;
-                        
-                        // Add visual feedback to input field
-                        if (data.valid) {
-                            emailInput.classList.remove('is-invalid');
-                            emailInput.classList.add('is-valid');
-                        } else {
-                            emailInput.classList.remove('is-valid');
-                            emailInput.classList.add('is-invalid');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        emailMessage.style.display = 'block';
-                        emailMessage.textContent = 'Error checking email. Please try again.';
-                        emailMessage.style.color = 'red';
-                    });
-                } else {
-                    // Hide message if email is empty
-                    emailMessage.style.display = 'none';
-                    emailInput.classList.remove('is-valid', 'is-invalid');
-                }
-            }, 3000); // 3 second delay
-        });
-    </script>
 </body>
 </html>
