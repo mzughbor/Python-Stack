@@ -1,0 +1,34 @@
+<!-- 🧭 MAIN NAVIGATION BAR - Complete Template -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <!-- Brand/Logo -->
+        <a class="navbar-brand" href="/">{{ app_name }}</a>
+        
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Navigation Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/items">All Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/create">Add New</a>
+                </li>
+            </ul>
+            
+            <!-- User Info & Actions -->
+            <div class="d-flex align-items-center">
+                <span class="text-light me-3">Welcome, {{ current_user.first_name }}</span>
+                <a class="btn btn-outline-light" href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>

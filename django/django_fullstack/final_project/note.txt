@@ -1,0 +1,39 @@
+This project is done - by the ajax checking email validations
+
+- only for email.
+- + applying special characters like + and so on to be safe while sending through the http transmission 
+
+explain:/ :)
+
+Why encodeURIComponent() is important:
+
+Without encoding:
+// If user types: "test@example.com"
+body: 'email=test@example.com'  // ✅ Works fine
+
+
+With special characters:
+// If user types: "user+tag@example.com" 
+body: 'email=user+tag@example.com'  // ❌ PROBLEM! + becomes space
+
+With encoding:
+// If user types: "user+tag@example.com"
+body: 'email=user%2Btag%40example.com'  // ✅ Safe! + becomes %2B, @ becomes %40
+
+that's become the issue with validations about emails
+
+so, characters that get encoded:
++ → %2B
+@ → %40
+& → %26
+= → %3D
+% → %25
+Spaces → %20
+
+Why this matters:
+Security: Prevents injection attacks
+Reliability: Ensures special characters in emails are preserved
+Standards: Follows HTTP protocol requirements
+User Experience: Users can use any valid email format
+
+

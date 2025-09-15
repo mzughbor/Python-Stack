@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Django Template Library Preview</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .template-card {
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .preview-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="category-header text-center">
+            <h1 class="mb-3">🎨 Django Template Library Preview</h1>
+            <p class="mb-0">Click on any template to preview it in a new tab. Copy the code you like!</p>
+        </div>
+
+        <!-- Components Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">🧩 Components</h2>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card template-card h-100 position-relative">
+                    <div class="preview-badge">Preview</div>
+                    <div class="card-body">
+                        <h5 class="card-title">🔘 Buttons</h5>
+                        <p class="card-text">All Bootstrap button styles and variations including primary, secondary, success, danger, and more.</p>
+                        <a href="components/buttons.html" target="_blank" class="btn btn-primary">Preview Buttons</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card template-card h-100 position-relative">
+                    <div class="preview-badge">Preview</div>
+                    <div class="card-body">
+                        <h5 class="card-title">🚨 Alerts</h5>
+                        <p class="card-text">Success, error, warning, and info alerts with dismissible functionality and Django messages integration.</p>
+                        <a href="components/alerts.html" target="_blank" class="btn btn-primary">Preview Alerts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forms Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">📝 Forms</h2>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card template-card h-100 position-relative">
+                    <div class="preview-badge">Preview</div>
+                    <div class="card-body">
+                        <h5 class="card-title">🔐 Login & Registration</h5>
+                        <p class="card-text">Complete login and registration form with validation, Bootstrap styling, and Django integration.</p>
+                        <a href="forms/login_registration.html" target="_blank" class="btn btn-primary">Preview Login Form</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card template-card h-100 position-relative">
+                    <div class="preview-badge">Preview</div>
+                    <div class="card-body">
+                        <h5 class="card-title">📝 Create Item Form</h5>
+                        <p class="card-text">Generic form for creating items with various input types: text, textarea, date, select, number, checkbox, radio.</p>
+                        <a href="forms/create_item.html" target="_blank" class="btn btn-primary">Preview Create Form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tables Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">📊 Tables</h2>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card template-card h-100 position-relative">
+                    <div class="preview-badge">Preview</div>
+                    <div class="card-body">
+                        <h5 class="card-title">📊 Data Table</h5>
+                        <p class="card-text">Bootstrap table with actions (View, Edit, Delete), responsive design, and Django template integration.</p>
+                        <a href="tables/data_table.html" target="_blank" class="btn btn-primary">Preview Data Table</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">🧭 Navigation</h2>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card template-card h-100 position-relative">
+                    <div class="preview-badge">Preview</div>
+                    <div class="card-body">
+                        <h5 class="card-title">🧭 Main Navbar</h5>
+                        <p class="card-text">Complete navigation bar with brand, links, user info, logout button, and mobile responsive design.</p>
+                        <a href="navigation/main_navbar.html" target="_blank" class="btn btn-primary">Preview Navbar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layouts Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">🏗️ Layouts</h2>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card template-card h-100 position-relative">
+                    <div class="preview-badge">Preview</div>
+                    <div class="card-body">
+                        <h5 class="card-title">🏗️ Main Layout</h5>
+                        <p class="card-text">Complete page layout with navigation, content area, footer, and responsive design. Perfect base template.</p>
+                        <a href="layouts/main_layout.html" target="_blank" class="btn btn-primary">Preview Main Layout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AJAX Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">🚀 AJAX</h2>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card template-card h-100 position-relative">
+                    <div class="preview-badge">Preview</div>
+                    <div class="card-body">
+                        <h5 class="card-title">🚀 AJAX Form</h5>
+                        <p class="card-text">Complete AJAX form submission with validation, error handling, loading states, and success messages.</p>
+                        <a href="ajax/form_submission.html" target="_blank" class="btn btn-primary">Preview AJAX Form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <h5>📋 How to Use This Preview System:</h5>
+                    <ol>
+                        <li><strong>Click "Preview"</strong> on any template to see it in a new tab</li>
+                        <li><strong>View the source code</strong> by right-clicking and selecting "View Page Source"</li>
+                        <li><strong>Copy the code</strong> you like and paste it into your Django project</li>
+                        <li><strong>Customize</strong> the template variables (like <code>{{ variable_name }}</code>) for your project</li>
+                    </ol>
+                    <p class="mb-0"><strong>💡 Tip:</strong> All templates use Bootstrap 5.3.0 and are designed to work with Django template syntax.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

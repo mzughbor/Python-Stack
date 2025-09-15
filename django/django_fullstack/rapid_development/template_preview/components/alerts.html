@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚨 Alerts Preview - Django Template Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+        }
+        .demo-section h4 {
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">🚨 Alerts Component Preview</h1>
+                <p class="text-center text-muted mb-5">All Bootstrap alert styles with Django integration ready to copy and paste.</p>
+            </div>
+        </div>
+
+        <!-- Success Alert -->
+        <div class="demo-section">
+            <h4>✅ Success Alert</h4>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Item created successfully!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="code-block">
+&lt;div class="alert alert-success alert-dismissible fade show" role="alert"&gt;
+    &lt;strong&gt;Success!&lt;/strong&gt; {{ success_message }}
+    &lt;button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"&gt;&lt;/button&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Error Alert -->
+        <div class="demo-section">
+            <h4>❌ Error Alert</h4>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> Something went wrong. Please try again.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="code-block">
+&lt;div class="alert alert-danger alert-dismissible fade show" role="alert"&gt;
+    &lt;strong&gt;Error!&lt;/strong&gt; {{ error_message }}
+    &lt;button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"&gt;&lt;/button&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Warning Alert -->
+        <div class="demo-section">
+            <h4>⚠️ Warning Alert</h4>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Warning!</strong> Please check your input before submitting.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="code-block">
+&lt;div class="alert alert-warning alert-dismissible fade show" role="alert"&gt;
+    &lt;strong&gt;Warning!&lt;/strong&gt; {{ warning_message }}
+    &lt;button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"&gt;&lt;/button&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Info Alert -->
+        <div class="demo-section">
+            <h4>ℹ️ Info Alert</h4>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong>Info!</strong> This feature is currently in beta.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="code-block">
+&lt;div class="alert alert-info alert-dismissible fade show" role="alert"&gt;
+    &lt;strong&gt;Info!&lt;/strong&gt; {{ info_message }}
+    &lt;button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"&gt;&lt;/button&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Django Messages Loop -->
+        <div class="demo-section">
+            <h4>🔄 Django Messages Loop</h4>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Item created successfully!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Validation error occurred.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="code-block">
+{% if messages %}
+    &lt;div class="container mt-3"&gt;
+        {% for message in messages %}
+            &lt;div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert"&gt;
+                {{ message }}
+                &lt;button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+        {% endfor %}
+    &lt;/div&gt;
+{% endif %}
+            </div>
+        </div>
+
+        <!-- Form Validation Errors -->
+        <div class="demo-section">
+            <h4>📝 Form Validation Errors</h4>
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    <li>Name: This field is required.</li>
+                    <li>Email: Enter a valid email address.</li>
+                </ul>
+            </div>
+            <div class="code-block">
+{% if form.errors %}
+    &lt;div class="alert alert-danger"&gt;
+        &lt;ul class="mb-0"&gt;
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    &lt;li&gt;{{ field|title }}: {{ error }}&lt;/li&gt;
+                {% endfor %}
+            {% endfor %}
+        &lt;/ul&gt;
+    &lt;/div&gt;
+{% endif %}
+            </div>
+        </div>
+
+        <!-- AJAX Messages Container -->
+        <div class="demo-section">
+            <h4>🚀 AJAX Messages Container</h4>
+            <div id="form-messages" class="mt-3">
+                <div class="alert alert-success">AJAX request completed successfully!</div>
+            </div>
+            <div class="code-block">
+&lt;!-- AJAX Messages Container --&gt;
+&lt;div id="form-messages" class="mt-3"&gt;&lt;/div&gt;
+
+&lt;!-- JavaScript to populate --&gt;
+document.getElementById('form-messages').innerHTML = 
+    '&lt;div class="alert alert-success"&gt;Success message&lt;/div&gt;';
+            </div>
+        </div>
+
+        <!-- Inline Messages -->
+        <div class="demo-section">
+            <h4>📌 Inline Messages</h4>
+            <div class="alert alert-success">Item created successfully!</div>
+            <div class="alert alert-danger">An error occurred. Please try again.</div>
+            <div class="code-block">
+&lt;!-- Inline Success Message --&gt;
+&lt;div class="alert alert-success"&gt;Item created successfully!&lt;/div&gt;
+
+&lt;!-- Inline Error Message --&gt;
+&lt;div class="alert alert-danger"&gt;An error occurred. Please try again.&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="alert alert-info mt-4">
+            <h5>📋 How to Use These Alerts:</h5>
+            <ol>
+                <li><strong>Copy the code</strong> from any alert you like</li>
+                <li><strong>Paste it</strong> into your Django template</li>
+                <li><strong>Replace variables</strong> like <code>{{ success_message }}</code> with your actual data</li>
+                <li><strong>Use Django messages</strong> for automatic alert display</li>
+                <li><strong>Add AJAX containers</strong> for dynamic content</li>
+            </ol>
+            <p class="mb-0"><strong>💡 Tip:</strong> All alerts are dismissible and work perfectly with Django's messages framework.</p>
+        </div>
+
+        <!-- Back to Index -->
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-outline-secondary">← Back to Template Library</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

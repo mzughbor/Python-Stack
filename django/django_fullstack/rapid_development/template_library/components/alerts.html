@@ -1,0 +1,59 @@
+<!-- 🚨 ALERT COMPONENTS - Quick Copy & Paste -->
+
+<!-- Success Alert -->
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success!</strong> {{ success_message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!-- Error Alert -->
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> {{ error_message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!-- Warning Alert -->
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Warning!</strong> {{ warning_message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!-- Info Alert -->
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    <strong>Info!</strong> {{ info_message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!-- Django Messages Loop -->
+{% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- Form Validation Errors -->
+{% if form.errors %}
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <li>{{ field|title }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+<!-- AJAX Messages Container -->
+<div id="form-messages" class="mt-3"></div>
+
+<!-- Inline Success Message -->
+<div class="alert alert-success">Item created successfully!</div>
+
+<!-- Inline Error Message -->
+<div class="alert alert-danger">An error occurred. Please try again.</div>

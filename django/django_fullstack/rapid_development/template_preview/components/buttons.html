@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔘 Buttons Preview - Django Template Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+        }
+        .demo-section h4 {
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">🔘 Buttons Component Preview</h1>
+                <p class="text-center text-muted mb-5">All Bootstrap button styles and variations ready to copy and paste into your Django templates.</p>
+            </div>
+        </div>
+
+        <!-- Primary Action Buttons -->
+        <div class="demo-section">
+            <h4>🎯 Primary Action Buttons</h4>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="submit" class="btn btn-warning">Update</button>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+            <div class="code-block">
+&lt;button type="submit" class="btn btn-primary"&gt;Create&lt;/button&gt;
+&lt;button type="submit" class="btn btn-success"&gt;Save&lt;/button&gt;
+&lt;button type="submit" class="btn btn-warning"&gt;Update&lt;/button&gt;
+&lt;button type="submit" class="btn btn-danger"&gt;Delete&lt;/button&gt;
+            </div>
+        </div>
+
+        <!-- Secondary Buttons -->
+        <div class="demo-section">
+            <h4>🔘 Secondary Buttons</h4>
+            <div class="mb-3">
+                <button type="button" class="btn btn-secondary">Cancel</button>
+                <button type="button" class="btn btn-outline-primary">Edit</button>
+                <button type="button" class="btn btn-outline-danger">Delete</button>
+            </div>
+            <div class="code-block">
+&lt;button type="button" class="btn btn-secondary"&gt;Cancel&lt;/button&gt;
+&lt;button type="button" class="btn btn-outline-primary"&gt;Edit&lt;/button&gt;
+&lt;button type="button" class="btn btn-outline-danger"&gt;Delete&lt;/button&gt;
+            </div>
+        </div>
+
+        <!-- Small Buttons -->
+        <div class="demo-section">
+            <h4>📏 Small Buttons</h4>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-sm btn-primary">Add</button>
+                <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+            </div>
+            <div class="code-block">
+&lt;button type="submit" class="btn btn-sm btn-primary"&gt;Add&lt;/button&gt;
+&lt;button type="submit" class="btn btn-sm btn-outline-danger"&gt;Remove&lt;/button&gt;
+            </div>
+        </div>
+
+        <!-- Button Groups -->
+        <div class="demo-section">
+            <h4>👥 Button Groups</h4>
+            <div class="mb-3">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary">View</button>
+                    <button type="button" class="btn btn-outline-warning">Edit</button>
+                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                </div>
+            </div>
+            <div class="code-block">
+&lt;div class="btn-group" role="group"&gt;
+    &lt;button type="button" class="btn btn-outline-primary"&gt;View&lt;/button&gt;
+    &lt;button type="button" class="btn btn-outline-warning"&gt;Edit&lt;/button&gt;
+    &lt;button type="button" class="btn btn-outline-danger"&gt;Delete&lt;/button&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="demo-section">
+            <h4>🧭 Navigation Buttons</h4>
+            <div class="mb-3">
+                <a href="/" class="btn btn-secondary">Go Back</a>
+                <a href="/create" class="btn btn-primary">Add New</a>
+                <a href="/logout" class="btn btn-outline-light">Logout</a>
+            </div>
+            <div class="code-block">
+&lt;a href="/" class="btn btn-secondary"&gt;Go Back&lt;/a&gt;
+&lt;a href="/create" class="btn btn-primary"&gt;Add New&lt;/a&gt;
+&lt;a href="/logout" class="btn btn-outline-light"&gt;Logout&lt;/a&gt;
+            </div>
+        </div>
+
+        <!-- Confirmation Buttons -->
+        <div class="demo-section">
+            <h4>⚠️ Confirmation Buttons</h4>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-danger" 
+                        onclick="return confirm('Are you sure you want to delete this item?')">
+                    Delete
+                </button>
+            </div>
+            <div class="code-block">
+&lt;button type="submit" class="btn btn-danger" 
+        onclick="return confirm('Are you sure you want to delete this item?')"&gt;
+    Delete
+&lt;/button&gt;
+            </div>
+        </div>
+
+        <!-- Disabled Buttons -->
+        <div class="demo-section">
+            <h4>🚫 Disabled Buttons</h4>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" disabled>Processing...</button>
+            </div>
+            <div class="code-block">
+&lt;button type="submit" class="btn btn-primary" disabled&gt;Processing...&lt;/button&gt;
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="alert alert-info mt-4">
+            <h5>📋 How to Use These Buttons:</h5>
+            <ol>
+                <li><strong>Copy the code</strong> from any button you like</li>
+                <li><strong>Paste it</strong> into your Django template</li>
+                <li><strong>Customize the text</strong> and actions as needed</li>
+                <li><strong>Add Django template variables</strong> like <code>{{ item.name }}</code> if needed</li>
+            </ol>
+            <p class="mb-0"><strong>💡 Tip:</strong> All buttons are styled with Bootstrap 5.3.0 and work perfectly with Django forms.</p>
+        </div>
+
+        <!-- Back to Index -->
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-outline-secondary">← Back to Template Library</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
