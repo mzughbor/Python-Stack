@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧭 Main Navbar Preview - Django Template Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+        }
+        .demo-section h4 {
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">🧭 Main Navbar Preview</h1>
+                <p class="text-center text-muted mb-5">Complete navigation bar with brand, links, user info, logout button, and mobile responsive design.</p>
+            </div>
+        </div>
+
+        <!-- Live Demo -->
+        <div class="demo-section">
+            <h4>👀 Live Demo</h4>
+            
+            <!-- Navigation Bar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container">
+                    <!-- Brand/Logo -->
+                    <a class="navbar-brand" href="/">My Django App</a>
+                    
+                    <!-- Mobile Toggle Button -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    
+                    <!-- Navigation Links -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/items">All Items</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/create">Add New</a>
+                            </li>
+                        </ul>
+                        
+                        <!-- User Info & Actions -->
+                        <div class="d-flex align-items-center">
+                            <span class="text-light me-3">Welcome, John Doe</span>
+                            <a class="btn btn-outline-light" href="/logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Different Navbar Styles -->
+        <div class="demo-section">
+            <h4>🎨 Different Navbar Styles</h4>
+            
+            <!-- Dark Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Dark Theme</a>
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/about">About</a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Light Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Light Theme</a>
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/about">About</a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Success Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Success Theme</a>
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/about">About</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Complete Template Code -->
+        <div class="demo-section">
+            <h4>📋 Complete Template Code</h4>
+            <div class="code-block">
+&lt;!-- 🧭 MAIN NAVIGATION BAR - Complete Template --&gt;
+
+&lt;nav class="navbar navbar-expand-lg navbar-dark bg-primary"&gt;
+    &lt;div class="container"&gt;
+        &lt;!-- Brand/Logo --&gt;
+        &lt;a class="navbar-brand" href="/"&gt;{{ app_name }}&lt;/a&gt;
+        
+        &lt;!-- Mobile Toggle Button --&gt;
+        &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+            &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+        
+        &lt;!-- Navigation Links --&gt;
+        &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+            &lt;ul class="navbar-nav me-auto"&gt;
+                &lt;li class="nav-item"&gt;
+                    &lt;a class="nav-link" href="/"&gt;Home&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class="nav-item"&gt;
+                    &lt;a class="nav-link" href="/items"&gt;All Items&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class="nav-item"&gt;
+                    &lt;a class="nav-link" href="/create"&gt;Add New&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+            
+            &lt;!-- User Info &amp; Actions --&gt;
+            &lt;div class="d-flex align-items-center"&gt;
+                &lt;span class="text-light me-3"&gt;Welcome, {{ current_user.first_name }}&lt;/span&gt;
+                &lt;a class="btn btn-outline-light" href="/logout"&gt;Logout&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+            </div>
+        </div>
+
+        <!-- Alternative Navbar Styles -->
+        <div class="demo-section">
+            <h4>🎨 Alternative Navbar Styles</h4>
+            <div class="code-block">
+&lt;!-- Dark Theme Navbar --&gt;
+&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
+    &lt;div class="container"&gt;
+        &lt;a class="navbar-brand" href="/"&gt;{{ app_name }}&lt;/a&gt;
+        &lt;div class="navbar-nav"&gt;
+            &lt;a class="nav-link" href="/"&gt;Home&lt;/a&gt;
+            &lt;a class="nav-link" href="/about"&gt;About&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;!-- Light Theme Navbar --&gt;
+&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+    &lt;div class="container"&gt;
+        &lt;a class="navbar-brand" href="/"&gt;{{ app_name }}&lt;/a&gt;
+        &lt;div class="navbar-nav"&gt;
+            &lt;a class="nav-link" href="/"&gt;Home&lt;/a&gt;
+            &lt;a class="nav-link" href="/about"&gt;About&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;!-- Success Theme Navbar --&gt;
+&lt;nav class="navbar navbar-expand-lg navbar-dark bg-success"&gt;
+    &lt;div class="container"&gt;
+        &lt;a class="navbar-brand" href="/"&gt;{{ app_name }}&lt;/a&gt;
+        &lt;div class="navbar-nav"&gt;
+            &lt;a class="nav-link" href="/"&gt;Home&lt;/a&gt;
+            &lt;a class="nav-link" href="/about"&gt;About&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="alert alert-info mt-4">
+            <h5>📋 How to Use This Navbar:</h5>
+            <ol>
+                <li><strong>Copy the template code</strong> above</li>
+                <li><strong>Include it</strong> in your base template or individual pages</li>
+                <li><strong>Update the links</strong> to match your Django URL patterns</li>
+                <li><strong>Pass context variables:</strong> <code>app_name</code> and <code>current_user</code></li>
+                <li><strong>Customize the theme</strong> by changing the Bootstrap classes (bg-primary, bg-dark, etc.)</li>
+            </ol>
+            <p class="mb-0"><strong>💡 Tip:</strong> The navbar is fully responsive and includes mobile toggle functionality. Perfect for any Django app!</p>
+        </div>
+
+        <!-- Back to Index -->
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-outline-secondary">← Back to Template Library</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

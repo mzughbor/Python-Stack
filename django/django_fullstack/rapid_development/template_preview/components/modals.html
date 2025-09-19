@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🪟 Modals Preview - Django Template Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+        }
+        .demo-section h4 {
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">🪟 Modals Preview</h1>
+                <p class="text-center text-muted mb-5">Bootstrap modals for confirmations, forms, and dynamic content with AJAX integration.</p>
+            </div>
+        </div>
+
+        <!-- Basic Modal -->
+        <div class="demo-section">
+            <h4>📋 Basic Modal</h4>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                Open Basic Modal
+            </button>
+            <div class="code-block">
+&lt;!-- Basic Modal --&gt;
+&lt;div class="modal fade" id="basicModal" tabindex="-1" aria-labelledby="basicModalLabel" aria-hidden="true"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h5 class="modal-title" id="basicModalLabel"&gt;Modal Title&lt;/h5&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                &lt;p&gt;Modal body text goes here.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+                &lt;button type="button" class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div class="demo-section">
+            <h4>⚠️ Confirmation Modal</h4>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                Delete Item
+            </button>
+            <div class="code-block">
+&lt;!-- Confirmation Modal --&gt;
+&lt;div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h5 class="modal-title" id="confirmModalLabel"&gt;Confirm Action&lt;/h5&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                &lt;p&gt;Are you sure you want to delete this item? This action cannot be undone.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Cancel&lt;/button&gt;
+                &lt;button type="button" class="btn btn-danger"&gt;Delete&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Form Modal -->
+        <div class="demo-section">
+            <h4>📝 Form Modal</h4>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">
+                Add New Item
+            </button>
+            <div class="code-block">
+&lt;!-- Form Modal --&gt;
+&lt;div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h5 class="modal-title" id="formModalLabel"&gt;Add New Item&lt;/h5&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;form&gt;
+                &lt;div class="modal-body"&gt;
+                    &lt;div class="mb-3"&gt;
+                        &lt;label for="itemName" class="form-label"&gt;Name&lt;/label&gt;
+                        &lt;input type="text" class="form-control" id="itemName" name="name" required&gt;
+                    &lt;/div&gt;
+                    &lt;div class="mb-3"&gt;
+                        &lt;label for="itemDescription" class="form-label"&gt;Description&lt;/label&gt;
+                        &lt;textarea class="form-control" id="itemDescription" name="description" rows="3"&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="modal-footer"&gt;
+                    &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Cancel&lt;/button&gt;
+                    &lt;button type="submit" class="btn btn-primary"&gt;Save Item&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Large Modal -->
+        <div class="demo-section">
+            <h4>📏 Large Modal</h4>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#largeModal">
+                Open Large Modal
+            </button>
+            <div class="code-block">
+&lt;!-- Large Modal --&gt;
+&lt;div class="modal fade" id="largeModal" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true"&gt;
+    &lt;div class="modal-dialog modal-lg"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h5 class="modal-title" id="largeModalLabel"&gt;Large Modal&lt;/h5&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                &lt;p&gt;This is a large modal with more content.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+                &lt;button type="button" class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Centered Modal -->
+        <div class="demo-section">
+            <h4>🎯 Centered Modal</h4>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#centeredModal">
+                Open Centered Modal
+            </button>
+            <div class="code-block">
+&lt;!-- Centered Modal --&gt;
+&lt;div class="modal fade" id="centeredModal" tabindex="-1" aria-labelledby="centeredModalLabel" aria-hidden="true"&gt;
+    &lt;div class="modal-dialog modal-dialog-centered"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h5 class="modal-title" id="centeredModalLabel"&gt;Centered Modal&lt;/h5&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                &lt;p&gt;This modal is vertically centered on the page.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+                &lt;button type="button" class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Django Template Modal with Data -->
+        <div class="demo-section">
+            <h4>🐍 Django Template Modal with Data</h4>
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#itemModal1">
+                View Item Details
+            </button>
+            <div class="code-block">
+&lt;!-- Django Template Modal with Data --&gt;
+&lt;div class="modal fade" id="itemModal{{ item.id }}" tabindex="-1" aria-labelledby="itemModalLabel{{ item.id }}" aria-hidden="true"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h5 class="modal-title" id="itemModalLabel{{ item.id }}"&gt;{{ item.name }}&lt;/h5&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                &lt;p&gt;&lt;strong&gt;Description:&lt;/strong&gt; {{ item.description }}&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Created:&lt;/strong&gt; {{ item.created_at|date:"F j, Y" }}&lt;/p&gt;
+                &lt;p&gt;&lt;strong&gt;Status:&lt;/strong&gt; 
+                    &lt;span class="badge bg-{{ item.status|yesno:'success,danger' }}"&gt;
+                        {{ item.status|yesno:'Active,Inactive' }}
+                    &lt;/span&gt;
+                &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+                &lt;a href="/{{ item_name }}/{{ item.id }}/edit" class="btn btn-primary"&gt;Edit&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="alert alert-info mt-4">
+            <h5>📋 How to Use These Modals:</h5>
+            <ol>
+                <li><strong>Copy the modal code</strong> from any example above</li>
+                <li><strong>Paste it</strong> into your Django template</li>
+                <li><strong>Add trigger buttons</strong> with <code>data-bs-toggle="modal"</code> and <code>data-bs-target="#modalId"</code></li>
+                <li><strong>Replace static content</strong> with Django template variables</li>
+                <li><strong>Add JavaScript</strong> for dynamic functionality if needed</li>
+            </ol>
+            <p class="mb-0"><strong>💡 Tip:</strong> Modals are perfect for confirmations, forms, and displaying detailed information without leaving the current page!</p>
+        </div>
+
+        <!-- Back to Index -->
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-outline-secondary">← Back to Template Library</a>
+        </div>
+    </div>
+
+    <!-- Basic Modal -->
+    <div class="modal fade" id="basicModal" tabindex="-1" aria-labelledby="basicModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="basicModalLabel">Modal Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirm Action</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Modal -->
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModalLabel">Add New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="itemName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="itemName" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="itemDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="itemDescription" name="description" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Large Modal -->
+    <div class="modal fade" id="largeModal" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="largeModalLabel">Large Modal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This is a large modal with more content.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Left Column</h6>
+                            <p>Content for the left column goes here.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Right Column</h6>
+                            <p>Content for the right column goes here.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Centered Modal -->
+    <div class="modal fade" id="centeredModal" tabindex="-1" aria-labelledby="centeredModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="centeredModalLabel">Centered Modal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This modal is vertically centered on the page.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Django Template Modal with Data -->
+    <div class="modal fade" id="itemModal1" tabindex="-1" aria-labelledby="itemModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="itemModalLabel1">Sample Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Description:</strong> This is a sample description that would come from your Django model.</p>
+                    <p><strong>Created:</strong> January 15, 2025</p>
+                    <p><strong>Status:</strong> 
+                        <span class="badge bg-success">Active</span>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

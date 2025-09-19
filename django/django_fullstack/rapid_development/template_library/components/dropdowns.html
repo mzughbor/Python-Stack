@@ -1,0 +1,274 @@
+<!-- 📋 DROPDOWN COMPONENTS - Quick Copy & Paste -->
+
+<!-- Basic Dropdown -->
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="basicDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown button
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="basicDropdown">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+</div>
+
+<!-- Dropdown with Divider -->
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dividerDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown with Divider
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dividerDropdown">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+</div>
+
+<!-- Dropdown with Headers -->
+<div class="dropdown">
+    <button class="btn btn-success dropdown-toggle" type="button" id="headerDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown with Headers
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="headerDropdown">
+        <li><h6 class="dropdown-header">Dropdown header</h6></li>
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><h6 class="dropdown-header">Another header</h6></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+</div>
+
+<!-- Dropdown with Disabled Items -->
+<div class="dropdown">
+    <button class="btn btn-warning dropdown-toggle" type="button" id="disabledDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown with Disabled
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="disabledDropdown">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">Disabled action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+    </ul>
+</div>
+
+<!-- Dropdown with Text -->
+<div class="dropdown">
+    <button class="btn btn-info dropdown-toggle" type="button" id="textDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Dropdown with Text
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="textDropdown">
+        <li><span class="dropdown-item-text">Dropdown item text</span></li>
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+    </ul>
+</div>
+
+<!-- Dropdown with Icons -->
+<div class="dropdown">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="iconDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-cog"></i> Settings
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="iconDropdown">
+        <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
+        <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    </ul>
+</div>
+
+<!-- Split Button Dropdown -->
+<div class="btn-group">
+    <button type="button" class="btn btn-primary">Action</button>
+    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Separated link</a></li>
+    </ul>
+</div>
+
+<!-- Dropdown Directions -->
+<div class="d-flex gap-2">
+    <!-- Drop Up -->
+    <div class="dropup">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropupDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropup
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropupDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </div>
+
+    <!-- Drop End -->
+    <div class="dropend">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropendDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropend
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropendDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </div>
+
+    <!-- Drop Start -->
+    <div class="dropstart">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropstartDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropstart
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropstartDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Navbar Dropdown -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <div class="navbar-nav">
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Django Template Dropdown with Data -->
+<div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ current_user.first_name }} {{ current_user.last_name }}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+        <li><a class="dropdown-item" href="/settings">Settings</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+    </ul>
+</div>
+
+<!-- Action Dropdown for Data Tables -->
+<div class="dropdown">
+    <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="actionDropdown{{ item.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+        Actions
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="actionDropdown{{ item.id }}">
+        <li><a class="dropdown-item" href="/{{ item_name }}/{{ item.id }}">View</a></li>
+        <li><a class="dropdown-item" href="/{{ item_name }}/{{ item.id }}/edit">Edit</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="#" onclick="deleteItem({{ item.id }})">Delete</a></li>
+    </ul>
+</div>
+
+<!-- Filter Dropdown -->
+<div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Filter by Category
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+        <li><a class="dropdown-item" href="?category=all">All Categories</a></li>
+        <li><hr class="dropdown-divider"></li>
+        {% for category in categories %}
+        <li><a class="dropdown-item" href="?category={{ category.id }}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Sort Dropdown -->
+<div class="dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Sort by {{ current_sort|default:"Name" }}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+        <li><a class="dropdown-item" href="?sort=name">Name</a></li>
+        <li><a class="dropdown-item" href="?sort=created_at">Date Created</a></li>
+        <li><a class="dropdown-item" href="?sort=updated_at">Last Updated</a></li>
+        <li><a class="dropdown-item" href="?sort=status">Status</a></li>
+    </ul>
+</div>
+
+<!-- Status Dropdown -->
+<div class="dropdown">
+    <button class="btn btn-{{ item.status|yesno:'success,danger' }} dropdown-toggle" type="button" id="statusDropdown{{ item.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ item.status|yesno:'Active,Inactive' }}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="statusDropdown{{ item.id }}">
+        <li><a class="dropdown-item" href="#" onclick="changeStatus({{ item.id }}, 'active')">Set Active</a></li>
+        <li><a class="dropdown-item" href="#" onclick="changeStatus({{ item.id }}, 'inactive')">Set Inactive</a></li>
+    </ul>
+</div>
+
+<!-- JavaScript for Dynamic Dropdowns -->
+<script>
+// Delete item function
+function deleteItem(itemId) {
+    if (confirm('Are you sure you want to delete this item?')) {
+        fetch(`/delete-item/${itemId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error deleting item');
+            }
+        });
+    }
+}
+
+// Change status function
+function changeStatus(itemId, status) {
+    fetch(`/change-status/${itemId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({status: status})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert('Error changing status');
+        }
+    });
+}
+
+// CSRF Token function
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>

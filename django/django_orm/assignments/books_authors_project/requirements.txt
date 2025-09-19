@@ -1,0 +1,5 @@
+Django>=5.2,<5.3
+asgiref>=3.9.1
+sqlparse>=0.4.4
+typing-extensions>=4.5.0
+tzdata>=2023.3  # Required for timezone support on Windows

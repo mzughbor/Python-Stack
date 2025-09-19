@@ -1,0 +1,238 @@
+Got it 👍 You want to **deploy your Django project on AWS**.
+I’ll give you **detailed, step-by-step instructions** for a basic production setup using **AWS EC2 + RDS (optional) + S3 (optional) + Nginx + Gunicorn**.
+
+---
+
+## 🚀 Step 1: Prepare Your Django Project for Deployment
+
+Before going to AWS:
+
+1. **Settings adjustments** in `settings.py`:
+
+   ```python
+   DEBUG = False
+   ALLOWED_HOSTS = ['your-ec2-public-ip', 'your-domain.com']
+   ```
+
+2. **Static files setup**:
+
+   ```bash
+   python manage.py collectstatic
+   ```
+
+3. Make sure you have a **requirements.txt**:
+
+   ```bash
+   pip freeze > requirements.txt
+   ```
+
+---
+
+## 🚀 Step 2: Launch an EC2 Instance
+
+1. Log in to [AWS Console](https://console.aws.amazon.com/).
+2. Go to **EC2 → Launch Instance**.
+3. Choose **Ubuntu 22.04 LTS** (or latest stable Ubuntu).
+4. Select **t2.micro** (free tier).
+5. Configure **Security Groups**:
+
+   * Allow **SSH (22)** → Your IP.
+   * Allow **HTTP (80)** → Anywhere.
+   * Allow **HTTPS (443)** → Anywhere.
+6. Create or select a **Key Pair** (download `.pem`).
+7. Launch the instance.
+
+---
+
+## 🚀 Step 3: Connect to EC2
+
+From your terminal:
+
+```bash
+chmod 400 your-key.pem
+ssh -i your-key.pem ubuntu@your-ec2-public-ip
+```
+
+---
+
+## 🚀 Step 4: Install Dependencies on EC2
+
+```bash
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install Python, pip, venv
+sudo apt install python3-pip python3-venv -y
+
+# Install PostgreSQL client (optional if you use RDS)
+sudo apt install postgresql postgresql-contrib libpq-dev -y
+
+# Install Nginx
+sudo apt install nginx -y
+```
+
+---
+
+## 🚀 Step 5: Clone Your Django Project
+
+You can use GitHub:
+
+```bash
+cd /home/ubuntu
+git clone https://github.com/yourusername/yourproject.git
+cd yourproject
+```
+
+---
+
+## 🚀 Step 6: Setup Virtual Environment
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+## 🚀 Step 7: Database Setup
+
+* If using **SQLite**, you’re fine.
+* If using **PostgreSQL**:
+
+  * Either install locally on EC2, or use **AWS RDS**.
+  * Update `settings.py` `DATABASES` section with your RDS credentials.
+
+Run migrations:
+
+```bash
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+---
+
+## 🚀 Step 8: Gunicorn Setup
+
+Install Gunicorn:
+
+```bash
+pip install gunicorn
+```
+
+Test it:
+
+```bash
+gunicorn --bind 0.0.0.0:8000 yourproject.wsgi:application
+```
+
+If it works → stop it (`CTRL+C`).
+
+---
+
+## 🚀 Step 9: Create a Gunicorn Systemd Service
+
+```bash
+sudo nano /etc/systemd/system/gunicorn.service
+```
+
+Paste:
+
+```ini
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/yourproject
+ExecStart=/home/ubuntu/yourproject/venv/bin/gunicorn \
+          --workers 3 \
+          --bind unix:/home/ubuntu/yourproject/yourproject.sock \
+          yourproject.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Save & exit.
+
+Enable service:
+
+```bash
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+sudo systemctl status gunicorn
+```
+
+---
+
+## 🚀 Step 10: Configure Nginx
+
+Create config:
+
+```bash
+sudo nano /etc/nginx/sites-available/yourproject
+```
+
+Paste:
+
+```nginx
+server {
+    listen 80;
+    server_name your-ec2-public-ip your-domain.com;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/ubuntu/yourproject;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/ubuntu/yourproject/yourproject.sock;
+    }
+}
+```
+
+Enable site:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/yourproject /etc/nginx/sites-enabled
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+---
+
+## 🚀 Step 11: Add Domain + SSL (Optional but Recommended)
+
+1. Point your domain DNS → EC2 Public IP.
+2. Install Certbot for free SSL:
+
+   ```bash
+   sudo apt install certbot python3-certbot-nginx -y
+   sudo certbot --nginx -d your-domain.com -d www.your-domain.com
+   ```
+
+---
+
+## 🚀 Step 12: Verify Deployment
+
+Open in browser:
+
+* [http://your-ec2-public-ip](http://your-ec2-public-ip)
+* or your domain.
+
+---
+
+## 🚀 Step 13: (Optional Enhancements)
+
+* Use **AWS RDS** for database.
+* Use **AWS S3 + boto3** for media & static storage.
+* Add **CI/CD with GitHub Actions** for auto-deploy.
+
+---
+
+👉 Do you want me to **write a simpler "minimal setup" (SQLite + EC2 only)** for now, or a **production-grade setup** with RDS + S3 + SSL?

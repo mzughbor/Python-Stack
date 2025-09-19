@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 Simple List Preview - Django Template Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+        }
+        .demo-section h4 {
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">📋 Simple List Preview</h1>
+                <p class="text-center text-muted mb-5">Clean and simple table layout for basic data display with minimal styling and Django integration.</p>
+            </div>
+        </div>
+
+        <!-- Live Demo -->
+        <div class="demo-section">
+            <h4>👀 Live Demo</h4>
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">All Books</h5>
+                    <a href="/books/new" class="btn btn-primary btn-sm">Add New</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Python Programming</td>
+                                    <td>A comprehensive guide to Python programming...</td>
+                                    <td>Jan 15, 2025</td>
+                                    <td>
+                                        <a href="/books/1" class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="/books/1/edit" class="btn btn-sm btn-outline-warning">Edit</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Django Web Development</td>
+                                    <td>Learn how to build web applications with Django...</td>
+                                    <td>Jan 14, 2025</td>
+                                    <td>
+                                        <a href="/books/2" class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="/books/2/edit" class="btn btn-sm btn-outline-warning">Edit</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>JavaScript Fundamentals</td>
+                                    <td>Master the fundamentals of JavaScript programming...</td>
+                                    <td>Jan 13, 2025</td>
+                                    <td>
+                                        <a href="/books/3" class="btn btn-sm btn-outline-primary">View</a>
+                                        <a href="/books/3/edit" class="btn btn-sm btn-outline-warning">Edit</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State Demo -->
+        <div class="demo-section">
+            <h4>📭 Empty State Demo</h4>
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">All Articles</h5>
+                    <a href="/articles/new" class="btn btn-primary btn-sm">Add New</a>
+                </div>
+                <div class="card-body">
+                    <div class="text-center py-5">
+                        <h5 class="text-muted">No articles found</h5>
+                        <p class="text-muted">Get started by adding your first article.</p>
+                        <a href="/articles/new" class="btn btn-primary">Add New Article</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Template Code -->
+        <div class="demo-section">
+            <h4>📋 Complete Template Code</h4>
+            <div class="code-block">
+&lt;!-- 📋 SIMPLE LIST - Basic Table Template --&gt;
+
+&lt;div class="card shadow-sm"&gt;
+    &lt;div class="card-header d-flex justify-content-between align-items-center"&gt;
+        &lt;h5 class="mb-0"&gt;All {{ item_name }}s&lt;/h5&gt;
+        &lt;a href="/{{ item_name }}/new" class="btn btn-primary btn-sm"&gt;Add New&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="card-body"&gt;
+        {% if all_items %}
+        &lt;div class="table-responsive"&gt;
+            &lt;table class="table table-hover"&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Name&lt;/th&gt;
+                        &lt;th&gt;Description&lt;/th&gt;
+                        &lt;th&gt;Created&lt;/th&gt;
+                        &lt;th&gt;Actions&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    {% for item in all_items %}
+                    &lt;tr&gt;
+                        &lt;td&gt;{{ item.name }}&lt;/td&gt;
+                        &lt;td&gt;{{ item.description|truncatechars:50 }}&lt;/td&gt;
+                        &lt;td&gt;{{ item.created_at|date:"M j, Y" }}&lt;/td&gt;
+                        &lt;td&gt;
+                            &lt;a href="/{{ item_name }}/{{ item.id }}" class="btn btn-sm btn-outline-primary"&gt;View&lt;/a&gt;
+                            &lt;a href="/{{ item_name }}/{{ item.id }}/edit" class="btn btn-sm btn-outline-warning"&gt;Edit&lt;/a&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                    {% endfor %}
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+        {% else %}
+        &lt;div class="text-center py-5"&gt;
+            &lt;h5 class="text-muted"&gt;No {{ item_name }}s found&lt;/h5&gt;
+            &lt;p class="text-muted"&gt;Get started by adding your first {{ item_name }}.&lt;/p&gt;
+            &lt;a href="/{{ item_name }}/new" class="btn btn-primary"&gt;Add New {{ item_name }}&lt;/a&gt;
+        &lt;/div&gt;
+        {% endif %}
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Alternative Styling -->
+        <div class="demo-section">
+            <h4>🎨 Alternative Styling</h4>
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">All Products</h5>
+                    <a href="/products/new" class="btn btn-success btn-sm">Add New</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Laptop</td>
+                                    <td>$999.99</td>
+                                    <td><span class="badge bg-success">In Stock</span></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="/products/1" class="btn btn-outline-primary">View</a>
+                                            <a href="/products/1/edit" class="btn btn-outline-warning">Edit</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mouse</td>
+                                    <td>$29.99</td>
+                                    <td><span class="badge bg-warning">Low Stock</span></td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="/products/2" class="btn btn-outline-primary">View</a>
+                                            <a href="/products/2/edit" class="btn btn-outline-warning">Edit</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="code-block">
+&lt;!-- Alternative Styling with Striped Table --&gt;
+&lt;div class="table-responsive"&gt;
+    &lt;table class="table table-striped"&gt;
+        &lt;thead class="table-dark"&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Product&lt;/th&gt;
+                &lt;th&gt;Price&lt;/th&gt;
+                &lt;th&gt;Stock&lt;/th&gt;
+                &lt;th&gt;Actions&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            {% for item in all_items %}
+            &lt;tr&gt;
+                &lt;td&gt;{{ item.name }}&lt;/td&gt;
+                &lt;td&gt;${{ item.price }}&lt;/td&gt;
+                &lt;td&gt;&lt;span class="badge bg-{{ item.stock_status|yesno:'success,warning' }}"&gt;{{ item.stock_status|yesno:'In Stock,Low Stock' }}&lt;/span&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;div class="btn-group btn-group-sm"&gt;
+                        &lt;a href="/{{ item_name }}/{{ item.id }}" class="btn btn-outline-primary"&gt;View&lt;/a&gt;
+                        &lt;a href="/{{ item_name }}/{{ item.id }}/edit" class="btn btn-outline-warning"&gt;Edit&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            {% endfor %}
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="alert alert-info mt-4">
+            <h5>📋 How to Use This Simple List:</h5>
+            <ol>
+                <li><strong>Copy the template code</strong> above</li>
+                <li><strong>Save it</strong> as <code>simple_list.html</code> in your Django app's templates folder</li>
+                <li><strong>Update the URLs</strong> to match your Django URL patterns</li>
+                <li><strong>Replace <code>{{ item_name }}</code></strong> with your actual item name (e.g., "book", "product", "article")</li>
+                <li><strong>Pass data from your view:</strong> <code>context = {'all_items': YourModel.objects.all(), 'item_name': 'book'}</code></li>
+                <li><strong>Customize columns</strong> by changing the table headers and data fields</li>
+            </ol>
+            <p class="mb-0"><strong>💡 Tip:</strong> This simple list is perfect for basic CRUD operations. It's clean, responsive, and easy to customize!</p>
+        </div>
+
+        <!-- Back to Index -->
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-outline-secondary">← Back to Template Library</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

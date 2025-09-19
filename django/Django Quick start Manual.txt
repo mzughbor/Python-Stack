@@ -2,7 +2,19 @@
 =================================================================
 ============ Django Quick Start Guide for Dummies ===============
 ============ Django Basics -** Using Linux Ubuntu ===============
+=================================================================	
 =================================================================
+
+-- section for deployment commands - we need...
+pip freeze > requirements.txt
+git config --global --add safe.directory 'repo directory'
+
+---notes---
+zip code > many to many trees 
+Users > many to many trees << zip code
+Zip Code > 
+---
+email address for the - to share git repo...
 =================================================================
 
 - to activate your Virtual Environment do this.

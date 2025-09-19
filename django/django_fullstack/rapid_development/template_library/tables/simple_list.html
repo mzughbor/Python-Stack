@@ -1,0 +1,43 @@
+<!-- 📋 SIMPLE LIST - Basic Table Template -->
+
+<div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">All {{ item_name }}s</h5>
+        <a href="/{{ item_name }}/new" class="btn btn-primary btn-sm">Add New</a>
+    </div>
+    <div class="card-body">
+        {% if all_items %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in all_items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.description|truncatechars:50 }}</td>
+                        <td>{{ item.created_at|date:"M j, Y" }}</td>
+                        <td>
+                            <a href="/{{ item_name }}/{{ item.id }}" class="btn btn-sm btn-outline-primary">View</a>
+                            <a href="/{{ item_name }}/{{ item.id }}/edit" class="btn btn-sm btn-outline-warning">Edit</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <h5 class="text-muted">No {{ item_name }}s found</h5>
+            <p class="text-muted">Get started by adding your first {{ item_name }}.</p>
+            <a href="/{{ item_name }}/new" class="btn btn-primary">Add New {{ item_name }}</a>
+        </div>
+        {% endif %}
+    </div>
+</div>

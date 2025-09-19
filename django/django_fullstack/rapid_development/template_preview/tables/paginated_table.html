@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📄 Paginated Table Preview - Django Template Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+        }
+        .demo-section h4 {
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">📄 Paginated Table Preview</h1>
+                <p class="text-center text-muted mb-5">Advanced table with pagination, sorting, bulk actions, and comprehensive Django template integration.</p>
+            </div>
+        </div>
+
+        <!-- Live Demo -->
+        <div class="demo-section">
+            <h4>👀 Live Demo</h4>
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">All Books</h5>
+                    <div class="d-flex gap-2">
+                        <select class="form-select form-select-sm" id="itemsPerPage">
+                            <option value="10" selected>10 per page</option>
+                            <option value="25">25 per page</option>
+                            <option value="50">50 per page</option>
+                            <option value="100">100 per page</option>
+                        </select>
+                        <a href="/books/new" class="btn btn-primary btn-sm">Add New</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>
+                                        <a href="?sort=name&order=asc" class="text-white text-decoration-none">
+                                            Name ↑
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="?sort=description&order=asc" class="text-white text-decoration-none">
+                                            Description
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="?sort=created_at&order=desc" class="text-white text-decoration-none">
+                                            Created ↓
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="?sort=status&order=asc" class="text-white text-decoration-none">
+                                            Status
+                                        </a>
+                                    </th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-2">
+                                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" 
+                                                     style="width: 32px; height: 32px;">
+                                                    <span class="text-white fw-bold">P</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold">Python Programming</div>
+                                                <small class="text-muted">ID: 1</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>A comprehensive guide to Python programming...</td>
+                                    <td>
+                                        <div>Jan 15, 2025</div>
+                                        <small class="text-muted">2 days ago</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">Active</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="/books/1" class="btn btn-outline-primary" 
+                                               data-bs-toggle="tooltip" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="/books/1/edit" class="btn btn-outline-warning"
+                                               data-bs-toggle="tooltip" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-outline-danger" 
+                                                    onclick="deleteItem(1)" data-bs-toggle="tooltip" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-2">
+                                                <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" 
+                                                     style="width: 32px; height: 32px;">
+                                                    <span class="text-white fw-bold">D</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold">Django Web Development</div>
+                                                <small class="text-muted">ID: 2</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Learn how to build web applications with Django...</td>
+                                    <td>
+                                        <div>Jan 14, 2025</div>
+                                        <small class="text-muted">3 days ago</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">Active</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="/books/2" class="btn btn-outline-primary" 
+                                               data-bs-toggle="tooltip" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="/books/2/edit" class="btn btn-outline-warning"
+                                               data-bs-toggle="tooltip" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-outline-danger" 
+                                                    onclick="deleteItem(2)" data-bs-toggle="tooltip" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="me-2">
+                                                <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" 
+                                                     style="width: 32px; height: 32px;">
+                                                    <span class="text-white fw-bold">J</span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold">JavaScript Fundamentals</div>
+                                                <small class="text-muted">ID: 3</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Master the fundamentals of JavaScript programming...</td>
+                                    <td>
+                                        <div>Jan 13, 2025</div>
+                                        <small class="text-muted">4 days ago</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-danger">Inactive</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a href="/books/3" class="btn btn-outline-primary" 
+                                               data-bs-toggle="tooltip" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="/books/3/edit" class="btn btn-outline-warning"
+                                               data-bs-toggle="tooltip" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-outline-danger" 
+                                                    onclick="deleteItem(3)" data-bs-toggle="tooltip" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Table pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">Previous</a>
+                            </li>
+                            <li class="page-item active">
+                                <span class="page-link">1</span>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=2">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=3">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=2">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=5">Last</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                    <!-- Pagination Info -->
+                    <div class="text-center text-muted">
+                        Showing 1 to 10 of 50 books
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bulk Actions Demo -->
+        <div class="demo-section">
+            <h4>⚡ Bulk Actions Demo</h4>
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="selectAll">
+                                <label class="form-check-label" for="selectAll">
+                                    Select All
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-2">
+                                <select class="form-select form-select-sm" id="bulkAction">
+                                    <option value="">Bulk Actions</option>
+                                    <option value="activate">Activate Selected</option>
+                                    <option value="deactivate">Deactivate Selected</option>
+                                    <option value="delete">Delete Selected</option>
+                                </select>
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="performBulkAction()">
+                                    Apply
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Template Code -->
+        <div class="demo-section">
+            <h4>📋 Complete Template Code</h4>
+            <div class="code-block">
+&lt;!-- 📊 PAGINATED TABLE - Advanced Table with Pagination --&gt;
+
+&lt;div class="card shadow-sm"&gt;
+    &lt;div class="card-header d-flex justify-content-between align-items-center"&gt;
+        &lt;h5 class="mb-0"&gt;All {{ item_name }}s&lt;/h5&gt;
+        &lt;div class="d-flex gap-2"&gt;
+            &lt;select class="form-select form-select-sm" id="itemsPerPage" onchange="changeItemsPerPage()"&gt;
+                &lt;option value="10" {% if items_per_page == 10 %}selected{% endif %}&gt;10 per page&lt;/option&gt;
+                &lt;option value="25" {% if items_per_page == 25 %}selected{% endif %}&gt;25 per page&lt;/option&gt;
+                &lt;option value="50" {% if items_per_page == 50 %}selected{% endif %}&gt;50 per page&lt;/option&gt;
+                &lt;option value="100" {% if items_per_page == 100 %}selected{% endif %}&gt;100 per page&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;a href="/{{ item_name }}/new" class="btn btn-primary btn-sm"&gt;Add New&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="card-body"&gt;
+        {% if all_items %}
+        &lt;div class="table-responsive"&gt;
+            &lt;table class="table table-striped table-hover"&gt;
+                &lt;thead class="table-dark"&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;
+                            &lt;a href="?sort=name&order={{ sort_order|default:'asc' }}" class="text-white text-decoration-none"&gt;
+                                Name {% if sort_by == 'name' %}{% if sort_order == 'asc' %}↑{% else %}↓{% endif %}{% endif %}
+                            &lt;/a&gt;
+                        &lt;/th&gt;
+                        &lt;th&gt;
+                            &lt;a href="?sort=description&order={{ sort_order|default:'asc' }}" class="text-white text-decoration-none"&gt;
+                                Description {% if sort_by == 'description' %}{% if sort_order == 'asc' %}↑{% else %}↓{% endif %}{% endif %}
+                            &lt;/a&gt;
+                        &lt;/th&gt;
+                        &lt;th&gt;
+                            &lt;a href="?sort=created_at&order={{ sort_order|default:'asc' }}" class="text-white text-decoration-none"&gt;
+                                Created {% if sort_by == 'created_at' %}{% if sort_order == 'asc' %}↑{% else %}↓{% endif %}{% endif %}
+                            &lt;/a&gt;
+                        &lt;/th&gt;
+                        &lt;th&gt;
+                            &lt;a href="?sort=status&order={{ sort_order|default:'asc' }}" class="text-white text-decoration-none"&gt;
+                                Status {% if sort_by == 'status' %}{% if sort_order == 'asc' %}↑{% else %}↓{% endif %}{% endif %}
+                            &lt;/a&gt;
+                        &lt;/th&gt;
+                        &lt;th&gt;Actions&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    {% for item in all_items %}
+                    &lt;tr&gt;
+                        &lt;td&gt;
+                            &lt;div class="d-flex align-items-center"&gt;
+                                &lt;div class="me-2"&gt;
+                                    &lt;div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" 
+                                         style="width: 32px; height: 32px;"&gt;
+                                        &lt;span class="text-white fw-bold"&gt;{{ item.name|first|upper }}&lt;/span&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                &lt;div&gt;
+                                    &lt;div class="fw-bold"&gt;{{ item.name }}&lt;/div&gt;
+                                    &lt;small class="text-muted"&gt;ID: {{ item.id }}&lt;/small&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/td&gt;
+                        &lt;td&gt;{{ item.description|truncatechars:60 }}&lt;/td&gt;
+                        &lt;td&gt;
+                            &lt;div&gt;{{ item.created_at|date:"M j, Y" }}&lt;/div&gt;
+                            &lt;small class="text-muted"&gt;{{ item.created_at|timesince }} ago&lt;/small&gt;
+                        &lt;/td&gt;
+                        &lt;td&gt;
+                            &lt;span class="badge bg-{{ item.status|yesno:'success,danger' }}"&gt;
+                                {{ item.status|yesno:'Active,Inactive' }}
+                            &lt;/span&gt;
+                        &lt;/td&gt;
+                        &lt;td&gt;
+                            &lt;div class="btn-group btn-group-sm" role="group"&gt;
+                                &lt;a href="/{{ item_name }}/{{ item.id }}" class="btn btn-outline-primary" 
+                                   data-bs-toggle="tooltip" title="View Details"&gt;
+                                    &lt;i class="fas fa-eye"&gt;&lt;/i&gt;
+                                &lt;/a&gt;
+                                &lt;a href="/{{ item_name }}/{{ item.id }}/edit" class="btn btn-outline-warning"
+                                   data-bs-toggle="tooltip" title="Edit"&gt;
+                                    &lt;i class="fas fa-edit"&gt;&lt;/i&gt;
+                                &lt;/a&gt;
+                                &lt;button type="button" class="btn btn-outline-danger" 
+                                        onclick="deleteItem({{ item.id }})" data-bs-toggle="tooltip" title="Delete"&gt;
+                                    &lt;i class="fas fa-trash"&gt;&lt;/i&gt;
+                                &lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                    {% endfor %}
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+        
+        &lt;!-- Pagination --&gt;
+        {% if is_paginated %}
+        &lt;nav aria-label="Table pagination"&gt;
+            &lt;ul class="pagination justify-content-center"&gt;
+                {% if page_obj.has_previous %}
+                &lt;li class="page-item"&gt;
+                    &lt;a class="page-link" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}"&gt;First&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class="page-item"&gt;
+                    &lt;a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}"&gt;Previous&lt;/a&gt;
+                &lt;/li&gt;
+                {% endif %}
+                
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    &lt;li class="page-item active"&gt;
+                        &lt;span class="page-link"&gt;{{ num }}&lt;/span&gt;
+                    &lt;/li&gt;
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    &lt;li class="page-item"&gt;
+                        &lt;a class="page-link" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}"&gt;{{ num }}&lt;/a&gt;
+                    &lt;/li&gt;
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                &lt;li class="page-item"&gt;
+                    &lt;a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}"&gt;Next&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class="page-item"&gt;
+                    &lt;a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}"&gt;Last&lt;/a&gt;
+                &lt;/li&gt;
+                {% endif %}
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+        
+        &lt;!-- Pagination Info --&gt;
+        &lt;div class="text-center text-muted"&gt;
+            Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} {{ item_name }}s
+        &lt;/div&gt;
+        {% endif %}
+        
+        {% else %}
+        &lt;div class="text-center py-5"&gt;
+            &lt;div class="mb-3"&gt;
+                &lt;i class="fas fa-inbox fa-3x text-muted"&gt;&lt;/i&gt;
+            &lt;/div&gt;
+            &lt;h5 class="text-muted"&gt;No {{ item_name }}s found&lt;/h5&gt;
+            &lt;p class="text-muted"&gt;Get started by adding your first {{ item_name }}.&lt;/p&gt;
+            &lt;a href="/{{ item_name }}/new" class="btn btn-primary"&gt;Add New {{ item_name }}&lt;/a&gt;
+        &lt;/div&gt;
+        {% endif %}
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="alert alert-info mt-4">
+            <h5>📋 How to Use This Paginated Table:</h5>
+            <ol>
+                <li><strong>Copy the complete template code</strong> above</li>
+                <li><strong>Save it</strong> as <code>paginated_table.html</code> in your Django app's templates folder</li>
+                <li><strong>Update the URLs</strong> to match your Django URL patterns</li>
+                <li><strong>Replace <code>{{ item_name }}</code></strong> with your actual item name</li>
+                <li><strong>Pass data from your view:</strong> <code>context = {'all_items': paginated_items, 'item_name': 'book'}</code></li>
+                <li><strong>Add pagination logic</strong> in your Django view using <code>Paginator</code></li>
+                <li><strong>Customize columns</strong> by changing the table headers and data fields</li>
+            </ol>
+            <p class="mb-0"><strong>💡 Tip:</strong> This table includes pagination, sorting, bulk actions, and comprehensive Django template integration. Perfect for data-heavy applications!</p>
+        </div>
+
+        <!-- Back to Index -->
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-outline-secondary">← Back to Template Library</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Demo functions
+        function deleteItem(itemId) {
+            if (confirm('Are you sure you want to delete this item?')) {
+                alert('Item ' + itemId + ' would be deleted in a real application.');
+            }
+        }
+
+        function changeItemsPerPage() {
+            const itemsPerPage = document.getElementById('itemsPerPage').value;
+            alert('Items per page changed to: ' + itemsPerPage);
+        }
+
+        function toggleSelectAll() {
+            const selectAll = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][name="item_ids"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAll.checked;
+            });
+        }
+
+        function performBulkAction() {
+            const action = document.getElementById('bulkAction').value;
+            if (!action) {
+                alert('Please select an action');
+                return;
+            }
+            alert('Bulk action "' + action + '" would be performed in a real application.');
+        }
+
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>

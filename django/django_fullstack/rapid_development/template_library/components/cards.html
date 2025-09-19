@@ -1,0 +1,184 @@
+<!-- 🃏 CARD COMPONENTS - Quick Copy & Paste -->
+
+<!-- Basic Card -->
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Card Title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>
+
+<!-- Card with Header -->
+<div class="card mb-3">
+    <div class="card-header">
+        <h5 class="mb-0">Card Header</h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text">Card content goes here.</p>
+    </div>
+</div>
+
+<!-- Card with Image -->
+<div class="card mb-3" style="width: 18rem;">
+    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Card image">
+    <div class="card-body">
+        <h5 class="card-title">Card with Image</h5>
+        <p class="card-text">Some quick example text to build on the card title.</p>
+        <a href="#" class="btn btn-primary">View Details</a>
+    </div>
+</div>
+
+<!-- Card with Footer -->
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Card Title</h5>
+        <p class="card-text">Card content goes here.</p>
+    </div>
+    <div class="card-footer text-muted">
+        Last updated 3 mins ago
+    </div>
+</div>
+
+<!-- Card with Badge -->
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">Card with Badge</h5>
+            <span class="badge bg-primary">New</span>
+        </div>
+        <p class="card-text mt-2">Card content with a badge.</p>
+    </div>
+</div>
+
+<!-- Card with List Group -->
+<div class="card mb-3" style="width: 18rem;">
+    <div class="card-header">
+        <h5 class="mb-0">Featured</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Cras justo odio</li>
+        <li class="list-group-item">Dapibus ac facilisis in</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+    <div class="card-footer">
+        <a href="#" class="btn btn-primary">View All</a>
+    </div>
+</div>
+
+<!-- Card with Form -->
+<div class="card mb-3">
+    <div class="card-header">
+        <h5 class="mb-0">Quick Action</h5>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- Card with Progress Bar -->
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Project Progress</h5>
+        <div class="progress mb-3">
+            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+        </div>
+        <p class="card-text">Project is 75% complete.</p>
+    </div>
+</div>
+
+<!-- Card with Icons -->
+<div class="card mb-3">
+    <div class="card-body text-center">
+        <i class="fas fa-star fa-3x text-warning mb-3"></i>
+        <h5 class="card-title">Premium Feature</h5>
+        <p class="card-text">This is a premium feature available to subscribers.</p>
+        <a href="#" class="btn btn-warning">Upgrade Now</a>
+    </div>
+</div>
+
+<!-- Card Grid Layout -->
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Card 1</h5>
+                <p class="card-text">Content for card 1.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Card 2</h5>
+                <p class="card-text">Content for card 2.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Card 3</h5>
+                <p class="card-text">Content for card 3.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Django Template Card with Data -->
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">{{ item.title }}</h5>
+        <small class="text-muted">{{ item.created_at|date:"M j, Y" }}</small>
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{ item.description|truncatechars:100 }}</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">By {{ item.author.first_name }} {{ item.author.last_name }}</small>
+            <div class="btn-group btn-group-sm">
+                <a href="/{{ item_name }}/{{ item.id }}" class="btn btn-outline-primary">View</a>
+                <a href="/{{ item_name }}/{{ item.id }}/edit" class="btn btn-outline-warning">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Card with Status Badge -->
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="card-text">{{ item.description }}</p>
+            </div>
+            <span class="badge bg-{{ item.status|yesno:'success,danger' }}">
+                {{ item.status|yesno:'Active,Inactive' }}
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Card with Actions -->
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ item.title }}</h5>
+        <p class="card-text">{{ item.content }}</p>
+    </div>
+    <div class="card-footer bg-transparent">
+        <div class="btn-group w-100" role="group">
+            <button type="button" class="btn btn-outline-primary">Like</button>
+            <button type="button" class="btn btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-outline-danger">Report</button>
+        </div>
+    </div>
+</div>

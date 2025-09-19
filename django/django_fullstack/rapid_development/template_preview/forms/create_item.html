@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 Create Item Form Preview - Django Template Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+        }
+        .demo-section h4 {
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+        .form-demo {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">📝 Create Item Form Preview</h1>
+                <p class="text-center text-muted mb-5">Generic form for creating items with various input types and Bootstrap styling.</p>
+            </div>
+        </div>
+
+        <!-- Live Demo -->
+        <div class="demo-section">
+            <h4>👀 Live Demo</h4>
+            <div class="form-demo">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Add New Book</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="/create">
+                            <div class="mb-3">
+                                <label for="title" class="form-label fw-bold">Title</label>
+                                <input type="text" class="form-control" id="title" name="title" 
+                                       placeholder="Enter title..." required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="description" class="form-label fw-bold">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" 
+                                          placeholder="Enter description..."></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="publication_date" class="form-label fw-bold">Publication Date</label>
+                                <input type="date" class="form-control" id="publication_date" name="publication_date">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="genre" class="form-label fw-bold">Genre</label>
+                                <select class="form-select" id="genre" name="genre">
+                                    <option value="">Select a genre</option>
+                                    <option value="fiction">Fiction</option>
+                                    <option value="non-fiction">Non-Fiction</option>
+                                    <option value="mystery">Mystery</option>
+                                    <option value="romance">Romance</option>
+                                    <option value="sci-fi">Science Fiction</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="rating" class="form-label fw-bold">Rating</label>
+                                <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" 
+                                       placeholder="1-5">
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="is_published" name="is_published">
+                                <label class="form-check-label" for="is_published">
+                                    Published
+                                </label>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Status</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="status1" value="active">
+                                    <label class="form-check-label" for="status1">Active</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="status2" value="inactive">
+                                    <label class="form-check-label" for="status2">Inactive</label>
+                                </div>
+                            </div>
+                            
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">Create Book</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Template Code -->
+        <div class="demo-section">
+            <h4>📋 Complete Template Code</h4>
+            <div class="code-block">
+&lt;!-- 📝 CREATE ITEM FORM - Generic Template --&gt;
+
+&lt;div class="card shadow-sm mb-4"&gt;
+    &lt;div class="card-header"&gt;
+        &lt;h5 class="mb-0"&gt;Add New {{ item_name }}&lt;/h5&gt;
+    &lt;/div&gt;
+    &lt;div class="card-body"&gt;
+        &lt;form method="post" action="{{ create_url }}"&gt;
+            {% csrf_token %}
+            
+            &lt;!-- Text Input --&gt;
+            &lt;div class="mb-3"&gt;
+                &lt;label for="{{ field_name }}" class="form-label fw-bold"&gt;{{ field_label }}&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="{{ field_name }}" name="{{ field_name }}" 
+                       placeholder="Enter {{ field_name }}..." required&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Textarea --&gt;
+            &lt;div class="mb-3"&gt;
+                &lt;label for="description" class="form-label fw-bold"&gt;Description&lt;/label&gt;
+                &lt;textarea class="form-control" id="description" name="description" rows="3" 
+                          placeholder="Enter description..."&gt;&lt;/textarea&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Date Input --&gt;
+            &lt;div class="mb-3"&gt;
+                &lt;label for="date_field" class="form-label fw-bold"&gt;Date&lt;/label&gt;
+                &lt;input type="date" class="form-control" id="date_field" name="date_field"&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Select Dropdown --&gt;
+            &lt;div class="mb-3"&gt;
+                &lt;label for="category" class="form-label fw-bold"&gt;Category&lt;/label&gt;
+                &lt;select class="form-select" id="category" name="category"&gt;
+                    &lt;option value=""&gt;Select a category&lt;/option&gt;
+                    &lt;option value="option1"&gt;Option 1&lt;/option&gt;
+                    &lt;option value="option2"&gt;Option 2&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Number Input --&gt;
+            &lt;div class="mb-3"&gt;
+                &lt;label for="rating" class="form-label fw-bold"&gt;Rating&lt;/label&gt;
+                &lt;input type="number" class="form-control" id="rating" name="rating" min="1" max="5" 
+                       placeholder="1-5"&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Checkbox --&gt;
+            &lt;div class="mb-3 form-check"&gt;
+                &lt;input type="checkbox" class="form-check-input" id="is_active" name="is_active"&gt;
+                &lt;label class="form-check-label" for="is_active"&gt;
+                    Active
+                &lt;/label&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Radio Buttons --&gt;
+            &lt;div class="mb-3"&gt;
+                &lt;label class="form-label fw-bold"&gt;Status&lt;/label&gt;
+                &lt;div class="form-check"&gt;
+                    &lt;input class="form-check-input" type="radio" name="status" id="status1" value="active"&gt;
+                    &lt;label class="form-check-label" for="status1"&gt;Active&lt;/label&gt;
+                &lt;/div&gt;
+                &lt;div class="form-check"&gt;
+                    &lt;input class="form-check-input" type="radio" name="status" id="status2" value="inactive"&gt;
+                    &lt;label class="form-check-label" for="status2"&gt;Inactive&lt;/label&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Submit Button --&gt;
+            &lt;div class="text-end"&gt;
+                &lt;button type="submit" class="btn btn-primary"&gt;Create {{ item_name }}&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Different Form Examples -->
+        <div class="demo-section">
+            <h4>🎨 Different Form Examples</h4>
+            
+            <!-- User Registration Form -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6 class="mb-0">User Registration Form</h6>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">First Name</label>
+                                    <input type="text" class="form-control" name="first_name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" name="last_name" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Product Form -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Product Form</h6>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Product Name</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" name="price" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" name="category">
+                                <option value="">Select category</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="books">Books</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="in_stock" name="in_stock">
+                            <label class="form-check-label" for="in_stock">In Stock</label>
+                        </div>
+                        <button type="submit" class="btn btn-success">Add Product</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="alert alert-info mt-4">
+            <h5>📋 How to Use This Form:</h5>
+            <ol>
+                <li><strong>Copy the template code</strong> above</li>
+                <li><strong>Customize the fields</strong> to match your Django model</li>
+                <li><strong>Update the form action</strong> to point to your Django view</li>
+                <li><strong>Replace template variables</strong> like <code>{{ item_name }}</code> with actual values</li>
+                <li><strong>Add validation</strong> in your Django view</li>
+                <li><strong>Style as needed</strong> using Bootstrap classes</li>
+            </ol>
+            <p class="mb-0"><strong>💡 Tip:</strong> This form includes all common input types. Just customize the fields and labels for your specific use case!</p>
+        </div>
+
+        <!-- Back to Index -->
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-outline-secondary">← Back to Template Library</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

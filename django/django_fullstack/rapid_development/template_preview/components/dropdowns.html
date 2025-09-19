@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 Dropdowns Preview - Django Template Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background: white;
+        }
+        .demo-section h4 {
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">📋 Dropdowns Preview</h1>
+                <p class="text-center text-muted mb-5">Bootstrap dropdowns for navigation, actions, filters, and user menus with Django template integration.</p>
+            </div>
+        </div>
+
+        <!-- Basic Dropdown -->
+        <div class="demo-section">
+            <h4>📋 Basic Dropdown</h4>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="basicDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="basicDropdown">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            <div class="code-block">
+&lt;div class="dropdown"&gt;
+    &lt;button class="btn btn-secondary dropdown-toggle" type="button" id="basicDropdown" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        Dropdown button
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" aria-labelledby="basicDropdown"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Another action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Dropdown with Divider -->
+        <div class="demo-section">
+            <h4>📋 Dropdown with Divider</h4>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dividerDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown with Divider
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dividerDropdown">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            <div class="code-block">
+&lt;div class="dropdown"&gt;
+    &lt;button class="btn btn-primary dropdown-toggle" type="button" id="dividerDropdown" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        Dropdown with Divider
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" aria-labelledby="dividerDropdown"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Another action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;hr class="dropdown-divider"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Dropdown with Headers -->
+        <div class="demo-section">
+            <h4>📋 Dropdown with Headers</h4>
+            <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button" id="headerDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown with Headers
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="headerDropdown">
+                    <li><h6 class="dropdown-header">Dropdown header</h6></li>
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><h6 class="dropdown-header">Another header</h6></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            <div class="code-block">
+&lt;div class="dropdown"&gt;
+    &lt;button class="btn btn-success dropdown-toggle" type="button" id="headerDropdown" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        Dropdown with Headers
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" aria-labelledby="headerDropdown"&gt;
+        &lt;li&gt;&lt;h6 class="dropdown-header"&gt;Dropdown header&lt;/h6&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Another action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;hr class="dropdown-divider"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;h6 class="dropdown-header"&gt;Another header&lt;/h6&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Dropdown with Icons -->
+        <div class="demo-section">
+            <h4>🎨 Dropdown with Icons</h4>
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="iconDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="iconDropdown">
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+            <div class="code-block">
+&lt;div class="dropdown"&gt;
+    &lt;button class="btn btn-outline-primary dropdown-toggle" type="button" id="iconDropdown" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        &lt;i class="fas fa-cog"&gt;&lt;/i&gt; Settings
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" aria-labelledby="iconDropdown"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;&lt;i class="fas fa-user"&gt;&lt;/i&gt; Profile&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;&lt;i class="fas fa-cog"&gt;&lt;/i&gt; Settings&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;&lt;i class="fas fa-sign-out-alt"&gt;&lt;/i&gt; Logout&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Split Button Dropdown -->
+        <div class="demo-section">
+            <h4>🔀 Split Button Dropdown</h4>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Action</button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <div class="code-block">
+&lt;div class="btn-group"&gt;
+    &lt;button type="button" class="btn btn-primary"&gt;Action&lt;/button&gt;
+    &lt;button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        &lt;span class="visually-hidden"&gt;Toggle Dropdown&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Another action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;hr class="dropdown-divider"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Dropdown Directions -->
+        <div class="demo-section">
+            <h4>🧭 Dropdown Directions</h4>
+            <div class="d-flex gap-2">
+                <!-- Drop Up -->
+                <div class="dropup">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropupDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropup
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropupDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+
+                <!-- Drop End -->
+                <div class="dropend">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropendDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropend
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropendDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+
+                <!-- Drop Start -->
+                <div class="dropstart">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropstartDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropstart
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropstartDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="code-block">
+&lt;!-- Drop Up --&gt;
+&lt;div class="dropup"&gt;
+    &lt;button class="btn btn-secondary dropdown-toggle" type="button" id="dropupDropdown" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        Dropup
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" aria-labelledby="dropupDropdown"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Another action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;!-- Drop End --&gt;
+&lt;div class="dropend"&gt;
+    &lt;button class="btn btn-secondary dropdown-toggle" type="button" id="dropendDropdown" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        Dropend
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" aria-labelledby="dropendDropdown"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Another action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;!-- Drop Start --&gt;
+&lt;div class="dropstart"&gt;
+    &lt;button class="btn btn-secondary dropdown-toggle" type="button" id="dropstartDropdown" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        Dropstart
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" aria-labelledby="dropstartDropdown"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Another action&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Django Template Dropdown with Data -->
+        <div class="demo-section">
+            <h4>🐍 Django Template Dropdown with Data</h4>
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    John Doe
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                    <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+            </div>
+            <div class="code-block">
+&lt;div class="dropdown"&gt;
+    &lt;button class="btn btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        {{ current_user.first_name }} {{ current_user.last_name }}
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" aria-labelledby="userDropdown"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="/profile"&gt;Profile&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="/settings"&gt;Settings&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;hr class="dropdown-divider"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="/logout"&gt;Logout&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Action Dropdown for Data Tables -->
+        <div class="demo-section">
+            <h4>⚡ Action Dropdown for Data Tables</h4>
+            <div class="dropdown">
+                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="actionDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Actions
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="actionDropdown1">
+                    <li><a class="dropdown-item" href="/items/1">View</a></li>
+                    <li><a class="dropdown-item" href="/items/1/edit">Edit</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteItem(1)">Delete</a></li>
+                </ul>
+            </div>
+            <div class="code-block">
+&lt;div class="dropdown"&gt;
+    &lt;button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="actionDropdown{{ item.id }}" data-bs-toggle="dropdown" aria-expanded="false"&gt;
+        Actions
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" aria-labelledby="actionDropdown{{ item.id }}"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="/{{ item_name }}/{{ item.id }}"&gt;View&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="/{{ item_name }}/{{ item.id }}/edit"&gt;Edit&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;hr class="dropdown-divider"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a class="dropdown-item text-danger" href="#" onclick="deleteItem({{ item.id }})"&gt;Delete&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Usage Instructions -->
+        <div class="alert alert-info mt-4">
+            <h5>📋 How to Use These Dropdowns:</h5>
+            <ol>
+                <li><strong>Copy the dropdown code</strong> from any example above</li>
+                <li><strong>Paste it</strong> into your Django template</li>
+                <li><strong>Update the links</strong> to match your Django URL patterns</li>
+                <li><strong>Replace static content</strong> with Django template variables</li>
+                <li><strong>Add JavaScript</strong> for dynamic functionality if needed</li>
+            </ol>
+            <p class="mb-0"><strong>💡 Tip:</strong> Dropdowns are perfect for user menus, action buttons, filters, and navigation. They work great with Django's template system!</p>
+        </div>
+
+        <!-- Back to Index -->
+        <div class="text-center mt-4">
+            <a href="../index.html" class="btn btn-outline-secondary">← Back to Template Library</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Demo function for delete action
+        function deleteItem(itemId) {
+            if (confirm('Are you sure you want to delete this item?')) {
+                alert('Item ' + itemId + ' would be deleted in a real application.');
+            }
+        }
+    </script>
+</body>
+</html>

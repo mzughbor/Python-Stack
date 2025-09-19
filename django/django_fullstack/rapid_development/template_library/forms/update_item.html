@@ -1,0 +1,83 @@
+<!-- 📝 UPDATE ITEM FORM - Generic Template -->
+
+<div class="card shadow-sm mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Edit {{ item_name }}</h5>
+    </div>
+    <div class="card-body">
+        <form method="post" action="{{ update_url }}">
+            {% csrf_token %}
+            
+            <!-- Text Input -->
+            <div class="mb-3">
+                <label for="{{ field_name }}" class="form-label fw-bold">{{ field_label }}</label>
+                <input type="text" class="form-control" id="{{ field_name }}" name="{{ field_name }}" 
+                       value="{{ item.name }}" placeholder="Enter {{ field_name }}..." required>
+            </div>
+            
+            <!-- Textarea -->
+            <div class="mb-3">
+                <label for="description" class="form-label fw-bold">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" 
+                          placeholder="Enter description...">{{ item.description }}</textarea>
+            </div>
+            
+            <!-- Date Input -->
+            <div class="mb-3">
+                <label for="date_field" class="form-label fw-bold">Date</label>
+                <input type="date" class="form-control" id="date_field" name="date_field" 
+                       value="{{ item.date_field|date:'Y-m-d' }}">
+            </div>
+            
+            <!-- Select Dropdown -->
+            <div class="mb-3">
+                <label for="category" class="form-label fw-bold">Category</label>
+                <select class="form-select" id="category" name="category">
+                    <option value="">Select a category</option>
+                    {% for option in categories %}
+                    <option value="{{ option.id }}" {% if item.category.id == option.id %}selected{% endif %}>
+                        {{ option.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Number Input -->
+            <div class="mb-3">
+                <label for="rating" class="form-label fw-bold">Rating</label>
+                <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" 
+                       value="{{ item.rating }}" placeholder="1-5">
+            </div>
+            
+            <!-- Checkbox -->
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="is_active" name="is_active" 
+                       {% if item.is_active %}checked{% endif %}>
+                <label class="form-check-label" for="is_active">
+                    Active
+                </label>
+            </div>
+            
+            <!-- Radio Buttons -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">Status</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="status1" value="active"
+                           {% if item.status == 'active' %}checked{% endif %}>
+                    <label class="form-check-label" for="status1">Active</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="status2" value="inactive"
+                           {% if item.status == 'inactive' %}checked{% endif %}>
+                    <label class="form-check-label" for="status2">Inactive</label>
+                </div>
+            </div>
+            
+            <!-- Submit Buttons -->
+            <div class="d-flex justify-content-between">
+                <a href="{{ cancel_url }}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Update {{ item_name }}</button>
+            </div>
+        </form>
+    </div>
+</div>
