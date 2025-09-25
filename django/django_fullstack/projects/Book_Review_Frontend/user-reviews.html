@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Reviews - Book Review System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Browser Header -->
+        <div class="row browser-header">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm">←</button>
+                        <button class="btn btn-outline-secondary btn-sm">→</button>
+                        <button class="btn btn-outline-secondary btn-sm">⟲</button>
+                        <button class="btn btn-outline-secondary btn-sm">×</button>
+                    </div>
+                    <div class="flex-grow-1 mx-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">🔍</span>
+                            <input type="text" class="form-control" value="http://localhost/users/1" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mt-4">
+            <!-- Navigation -->
+            <div class="d-flex justify-content-end mb-4">
+                <div class="d-flex gap-2">
+                    <a href="books.html" class="btn btn-outline-primary btn-sm">Home</a>
+                    <a href="add-book.html" class="btn btn-outline-success btn-sm">Add Book and Review</a>
+                    <a href="index.html" class="btn btn-outline-danger btn-sm">Logout</a>
+                </div>
+            </div>
+
+            <!-- User Information -->
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">User Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-2"><strong>User Alias:</strong> Jessie</p>
+                                    <p class="mb-2"><strong>Name:</strong> Jessie Jaime</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-2"><strong>Email:</strong> jessiej@yahoo.com</p>
+                                    <p class="mb-2"><strong>Total Reviews:</strong> 3</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Posted Reviews Section -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Posted Reviews</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="book-list">
+                                <div class="book-item mb-3">
+                                    <h6 class="mb-1">
+                                        <a href="book-details.html" class="text-decoration-none">Divergent</a>
+                                    </h6>
+                                    <small class="text-muted">Posted on October 31, 2014</small>
+                                </div>
+                                <div class="book-item mb-3">
+                                    <h6 class="mb-1">
+                                        <a href="book-details.html" class="text-decoration-none">The Vampire Chronicles</a>
+                                    </h6>
+                                    <small class="text-muted">Posted on October 28, 2014</small>
+                                </div>
+                                <div class="book-item mb-3">
+                                    <h6 class="mb-1">
+                                        <a href="book-details.html" class="text-decoration-none">The Life of Pie</a>
+                                    </h6>
+                                    <small class="text-muted">Posted on October 25, 2014</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Reviews Note -->
+            <div class="alert alert-info mt-4" role="alert">
+                <h6 class="alert-heading">User Reviews</h6>
+                <p class="mb-0 small">Displays the user data and the count of reviews the user has posted. Also displays the list of books where the user posted his/her review.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -87,6 +87,7 @@ def view_book(request, id):
     try:
         book = Book.objects.get(id=id)
         user = User.objects.get(id=request.session['user_id'])
+        # authorization check
         ability = user.books_uploaded.filter(id=id).exists()
         is_liked_this_book = user.liked_books.filter(id=id).exists() # this for sidebar display buttons thing...
         print(is_liked_this_book)
@@ -129,6 +130,7 @@ def delete_book(request, id):
     try:
         book = Book.objects.get(id=id)
         user = User.objects.get(id=request.session['user_id'])
+        # authorization check
         ability = user.books_uploaded.filter(id=id).exists()
         if not ability:
             messages.error(request, "You do not have permission to delete this book!")

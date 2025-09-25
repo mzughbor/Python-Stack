@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Tree Mapper</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row bg-light border-bottom">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                    <h4 class="mb-0">Login</h4>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm">←</button>
+                        <button class="btn btn-outline-secondary btn-sm">⟲</button>
+                        <button class="btn btn-outline-secondary btn-sm">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mt-5">
+            <!-- Application Title -->
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold text-success">Tree Mapper</h1>
+            </div>
+
+            <div class="row justify-content-center">
+                <!-- Register Section -->
+                <div class="col-md-5 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Register</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="regFirstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="regFirstName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="regLastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="regLastName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="regEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="regEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="regPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="regPassword" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="regConfirmPassword" class="form-label">Confirm PW</label>
+                                    <input type="password" class="form-control" id="regConfirmPassword" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Registration Validations (MVP) -->
+                    <div class="alert alert-warning mt-3" role="alert">
+                        <h6 class="alert-heading">Registration Validations</h6>
+                        <ul class="mb-0 small">
+                            <li>All fields required</li>
+                            <li>First and last name must be at least 2 characters</li>
+                            <li>Account must not already exist</li>
+                            <li>Email must be a valid email</li>
+                            <li>Password minimum 8 characters</li>
+                            <li>PW and confirm PW must match</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Login Section -->
+                <div class="col-md-5 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Log in</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="loginEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="loginPassword" required>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Authentication Validations (MVP) -->
+                    <div class="alert alert-warning mt-3" role="alert">
+                        <h6 class="alert-heading">Authentication Validations</h6>
+                        <ul class="mb-0 small">
+                            <li>Account must exist</li>
+                            <li>Password matches account</li>
+                            <li>Users must be logged in to see any of the site's internal pages</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

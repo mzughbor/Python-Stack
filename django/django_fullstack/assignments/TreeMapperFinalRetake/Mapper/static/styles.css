@@ -1,0 +1,180 @@
+/* Tree Mapper Frontend Custom Styles */
+
+/* Purple badge for zip codes (stretch goal feature) */
+.bg-purple {
+    background-color: #6f42c1 !important;
+    color: white;
+}
+
+/* Custom styling for browser-like header */
+.browser-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.5rem 1rem;
+}
+
+/* Custom button group spacing */
+.btn-group-sm .btn {
+    margin-right: 0.25rem;
+}
+
+.btn-group-sm .btn:last-child {
+    margin-right: 0;
+}
+
+/* Custom card styling for better visual hierarchy */
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+/* Custom table styling */
+.table th {
+    font-weight: 600;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Custom form styling */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* Custom alert styling */
+.alert-heading {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.alert ul {
+    margin-bottom: 0;
+}
+
+.alert ul li {
+    margin-bottom: 0.25rem;
+}
+
+/* Custom spacing for better layout */
+.mb-section {
+    margin-bottom: 3rem;
+}
+
+/* Custom text styling */
+.text-success {
+    color: #28a745 !important;
+}
+
+/* Custom button styling */
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* Custom input group styling */
+.input-group-text {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    color: #6c757d;
+}
+
+/* Custom badge styling */
+.badge {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+/* Custom link styling */
+.btn-link {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* Custom display styling */
+.display-4 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Custom lead text styling */
+.lead {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #6c757d;
+}
+
+/* Custom container max-width for better readability */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* Custom responsive adjustments */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+
+    .btn-group-sm .btn {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+}
+
+/* Custom spacing for form sections */
+.form-section {
+    margin-bottom: 2rem;
+}
+
+/* Custom error message styling */
+.alert-danger {
+    border-left: 4px solid #dc3545;
+}
+
+/* Custom warning message styling */
+.alert-warning {
+    border-left: 4px solid #ffc107;
+}
+
+/* Custom info message styling */
+.alert-info {
+    border-left: 4px solid #17a2b8;
+}
+
+/* Custom success message styling */
+.alert-success {
+    border-left: 4px solid #28a745;
+}

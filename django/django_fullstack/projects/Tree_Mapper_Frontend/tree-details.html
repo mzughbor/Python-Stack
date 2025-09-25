@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details - Tree Mapper</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row bg-light border-bottom">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                    <h4 class="mb-0">Details</h4>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm">←</button>
+                        <button class="btn btn-outline-secondary btn-sm">⟲</button>
+                        <button class="btn btn-outline-secondary btn-sm">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mt-4">
+            <!-- Application Title and Tagline -->
+            <div class="text-center mb-4">
+                <h1 class="display-4 fw-bold text-success">Tree Mapper</h1>
+                <p class="lead text-muted">Find, share and learn about real trees!</p>
+            </div>
+
+            <!-- User Greeting and Navigation -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="mb-0">Welcome Maggie!</h5>
+                <div class="d-flex gap-2">
+                    <a href="dashboard.html" class="btn btn-outline-primary btn-sm">Dashboard</a>
+                    <a href="index.html" class="btn btn-outline-danger btn-sm">Logout</a>
+                </div>
+            </div>
+
+            <!-- Tree Information -->
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title text-success">Traveller's Palm added by Bethany Hamilton</h3>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h6 class="text-muted">Where</h6>
+                                    <p class="fs-5">19°45'32.5"N 155°05'46.5"W</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-muted">When</h6>
+                                    <p class="fs-5">November 24th 2018</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h6 class="text-muted">Notes</h6>
+                                <p class="fs-6">Can be used as an emergency water supply if you're dehydrated!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MVP Requirements -->
+            <div class="alert alert-warning mt-4" role="alert">
+                <h6 class="alert-heading">MVP</h6>
+                <p class="mb-0 small">Display details about the tree</p>
+            </div>
+
+            <!-- Visited By Section (Stretch Goal) -->
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-8">
+                    <div class="card border-info">
+                        <div class="card-header bg-info text-white">
+                            <h6 class="mb-0">Visited By</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="mb-1">John Cruz</p>
+                                    <p class="mb-1">Ciso Lobo</p>
+                                    <p class="mb-0">Daniel Ho</p>
+                                </div>
+                                <a href="#" class="btn btn-info btn-sm">Did you visit this tree?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stretch Goal Requirements -->
+            <div class="alert alert-info mt-3" role="alert">
+                <h6 class="alert-heading">Stretch Goal</h6>
+                <ul class="mb-0 small">
+                    <li>Users can visit trees. List any visitors to this tree, and a link to visit the tree.</li>
+                    <li>The link should not appear if the user already visited the tree.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New - Tree Mapper</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row bg-light border-bottom">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                    <h4 class="mb-0">New</h4>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm">←</button>
+                        <button class="btn btn-outline-secondary btn-sm">⟲</button>
+                        <button class="btn btn-outline-secondary btn-sm">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mt-4">
+            <!-- Page Title -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Add a Tree to the Map</h2>
+            </div>
+
+            <!-- User Greeting and Navigation -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="mb-0">Welcome Maggie!</h5>
+                <div class="d-flex gap-2">
+                    <a href="dashboard.html" class="btn btn-outline-primary btn-sm">Dashboard</a>
+                    <a href="index.html" class="btn btn-outline-danger btn-sm">Logout</a>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div class="alert alert-danger" role="alert">
+                Species must not be blank
+            </div>
+
+            <!-- Add Tree Form -->
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="species" class="form-label">Species</label>
+                                    <input type="text" class="form-control" id="species" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">Location</label>
+                                    <input type="text" class="form-control" id="location" value="Mililani Ravine Park" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="dateFound" class="form-label">Date Found</label>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" id="dateFound" value="2024-05-15" required>
+                                        <span class="input-group-text">📅</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="zipCode" class="form-label">Zip code</label>
+                                    <input type="text" class="form-control" id="zipCode" value="96789" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="notes" class="form-label">Notes</label>
+                                    <textarea class="form-control" id="notes" rows="3" required>Near the bathrooms. You can tell by the umbrella shape and height it's a Monkeypod tree.</textarea>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MVP Validations -->
+            <div class="alert alert-warning mt-4" role="alert">
+                <h6 class="alert-heading">MVP Validations</h6>
+                <ul class="mb-0 small">
+                    <li>All fields present</li>
+                    <li>Species min 2 characters</li>
+                    <li>Address min 5 characters</li>
+                    <li>Notes max 50 characters</li>
+                </ul>
+            </div>
+
+            <!-- Stretch Goal Validations -->
+            <div class="alert alert-info mt-2" role="alert">
+                <h6 class="alert-heading">Stretch Goal Validations</h6>
+                <ul class="mb-0 small">
+                    <li>Date not in the future</li>
+                    <li>Include a zip code field</li>
+                    <li>Zip must be a 5 digit number</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

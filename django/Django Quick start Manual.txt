@@ -5,22 +5,21 @@
 =================================================================	
 =================================================================
 
--- section for deployment commands - we need...
+--  deployment commands..       <<<<<<<<<<<<<<<<<<<<<
+
 pip freeze > requirements.txt
+
 git config --global --add safe.directory 'repo directory'
 
----notes---
-zip code > many to many trees 
-Users > many to many trees << zip code
-Zip Code > 
----
-email address for the - to share git repo...
 =================================================================
 
 - to activate your Virtual Environment do this.
 
 source ~/djangoSysEnv/bin/activate
 
+cd /media/mzug/Save-Data/1/Food_Ordering_Platform && source venv/bin/activate 
+
+source /media/mzug/Save-Data/1/old-peo-test/digitalm/env/bin/activate
 =========================
 
 - to start project 
@@ -51,6 +50,12 @@ urlpatterns = [
 	path('', views.root ) # this is function will be served for user when visisting root path..
 ]
 =========================
+python manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+
+=========================
+
 
 - now we go to views to create the functions >> in our app views.py file do this..
 - add extra import to exisisted ones / HttpResponse / JsonResponse / redirect or whatever you used in views return thing...

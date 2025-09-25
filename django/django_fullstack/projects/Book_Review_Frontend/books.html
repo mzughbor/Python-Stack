@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books - Book Review System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Browser Header -->
+        <div class="row browser-header">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm">←</button>
+                        <button class="btn btn-outline-secondary btn-sm">→</button>
+                        <button class="btn btn-outline-secondary btn-sm">⟲</button>
+                        <button class="btn btn-outline-secondary btn-sm">×</button>
+                    </div>
+                    <div class="flex-grow-1 mx-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">🔍</span>
+                            <input type="text" class="form-control" value="http://localhost/books" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mt-4">
+            <!-- Welcome Message and Navigation -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Welcome, Jessie!</h2>
+                <div class="d-flex gap-2">
+                    <a href="add-book.html" class="btn btn-primary btn-sm">Add Book and Review</a>
+                    <a href="index.html" class="btn btn-outline-danger btn-sm">Logout</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Recent Book Reviews Section -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="mb-0">Recent Book Reviews:</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Review 1 -->
+                            <div class="review-item mb-3 pb-3 border-bottom">
+                                <h6 class="mb-2">
+                                    <a href="book-details.html" class="text-decoration-none">The Greatest Salesman in the World</a>
+                                </h6>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="stars me-2">
+                                        <span class="text-warning">★★★★</span><span class="text-muted">☆</span>
+                                    </div>
+                                </div>
+                                <p class="mb-1">
+                                    <a href="user-reviews.html" class="text-decoration-none fw-bold">Jerry</a> says: Very inspiring...
+                                </p>
+                                <small class="text-muted">Posted on November 25, 2014</small>
+                            </div>
+
+                            <!-- Review 2 -->
+                            <div class="review-item mb-3 pb-3 border-bottom">
+                                <h6 class="mb-2">
+                                    <a href="book-details.html" class="text-decoration-none">Tuesdays with Morrie</a>
+                                </h6>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="stars me-2">
+                                        <span class="text-warning">★★★</span><span class="text-muted">☆☆</span>
+                                    </div>
+                                </div>
+                                <p class="mb-1">
+                                    <a href="user-reviews.html" class="text-decoration-none fw-bold">Mike</a> says: Drama and inspiration.
+                                </p>
+                                <small class="text-muted">Posted on November 23, 2014</small>
+                            </div>
+
+                            <!-- Review 3 -->
+                            <div class="review-item mb-3 pb-3">
+                                <h6 class="mb-2">
+                                    <a href="book-details.html" class="text-decoration-none">Divergent</a>
+                                </h6>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="stars me-2">
+                                        <span class="text-warning">★★★</span><span class="text-muted">☆☆</span>
+                                    </div>
+                                </div>
+                                <p class="mb-1">
+                                    <a href="user-reviews.html" class="text-decoration-none fw-bold">Shirley</a> says: My daughter loves reading this...
+                                </p>
+                                <small class="text-muted">Posted on November 21, 2014</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Reviews Note -->
+                    <div class="alert alert-info mt-3" role="alert">
+                        <h6 class="alert-heading">Recent Reviews</h6>
+                        <p class="mb-0 small">Displays the latest 3 reviews. Book title is linked to the book's individual page. User name is linked to the user's individual page.</p>
+                    </div>
+                </div>
+
+                <!-- Other Books with Reviews Section -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="mb-0">Other Books with Reviews:</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="book-list">
+                                <div class="book-item mb-2">
+                                    <a href="book-details.html" class="text-decoration-none">Harry Potter: The Sorcerer's Stone</a>
+                                </div>
+                                <div class="book-item mb-2">
+                                    <a href="book-details.html" class="text-decoration-none">The Hunger Game: Fastfood Series</a>
+                                </div>
+                                <div class="book-item mb-2">
+                                    <a href="book-details.html" class="text-decoration-none">The Life of Pie</a>
+                                </div>
+                                <div class="book-item mb-2">
+                                    <a href="book-details.html" class="text-decoration-none">The Scrapbook</a>
+                                </div>
+                                <div class="book-item mb-2">
+                                    <a href="book-details.html" class="text-decoration-none">Frozen Elsa: Autobiography</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Other Books Note -->
+                    <div class="alert alert-info mt-3" role="alert">
+                        <h6 class="alert-heading">Other Books</h6>
+                        <p class="mb-0 small">Displays the list of book titles with existing reviews. Each book title is linked to the book's individual page.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

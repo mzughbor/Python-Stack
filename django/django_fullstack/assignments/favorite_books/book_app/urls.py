@@ -10,3 +10,4 @@ urlpatterns = [
     path('add_fav/<int:id>', views.add_fav, name="add_fav"),
     path('delete_fav/<int:id>', views.delete_fav, name="delete_fav")
 ]
+

@@ -1,4 +1,9 @@
 {
     "html.format.templating": true,
-    "html.format.unformatted": ""
+    "html.format.unformatted": "",
+    "emmet.includeLanguages": {
+        "html": "html",
+        "django-html": "html"
+    },
+    "emmet.triggerExpansionOnTab": true
 }

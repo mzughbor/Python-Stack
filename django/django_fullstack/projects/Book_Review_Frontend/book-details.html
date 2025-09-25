@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - Book Review System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Browser Header -->
+        <div class="row browser-header">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm">←</button>
+                        <button class="btn btn-outline-secondary btn-sm">→</button>
+                        <button class="btn btn-outline-secondary btn-sm">⟲</button>
+                        <button class="btn btn-outline-secondary btn-sm">×</button>
+                    </div>
+                    <div class="flex-grow-1 mx-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">🔍</span>
+                            <input type="text" class="form-control" value="http://localhost/books/1" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mt-4">
+            <!-- Navigation -->
+            <div class="d-flex justify-content-end mb-4">
+                <div class="d-flex gap-2">
+                    <a href="books.html" class="btn btn-outline-primary btn-sm">Home</a>
+                    <a href="index.html" class="btn btn-outline-danger btn-sm">Logout</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Book Details and Reviews -->
+                <div class="col-md-8">
+                    <!-- Book Information -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title">Divergent</h3>
+                            <p class="card-text"><strong>Author:</strong> Veronica Roth</p>
+                        </div>
+                    </div>
+
+                    <!-- Existing Reviews -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Reviews</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Review 1 -->
+                            <div class="review-item mb-3 pb-3 border-bottom">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="stars me-2">
+                                        <span class="text-warning">★★★</span><span class="text-muted">☆☆</span>
+                                    </div>
+                                </div>
+                                <p class="mb-1">
+                                    <a href="user-reviews.html" class="text-decoration-none fw-bold">Shirley</a> says: My daughter loves reading this...
+                                </p>
+                                <small class="text-muted">Posted on November 21, 2014</small>
+                            </div>
+
+                            <!-- Review 2 -->
+                            <div class="review-item mb-3 pb-3 border-bottom">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="stars me-2">
+                                        <span class="text-warning">★★★★</span><span class="text-muted">☆</span>
+                                    </div>
+                                </div>
+                                <p class="mb-1">
+                                    <a href="user-reviews.html" class="text-decoration-none fw-bold">David</a> says: I love the action!
+                                </p>
+                                <small class="text-muted">Posted on October 31, 2014</small>
+                            </div>
+
+                            <!-- Review 3 (Jessie's review with delete option) -->
+                            <div class="review-item mb-3 pb-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="stars me-2">
+                                        <span class="text-warning">★★★</span><span class="text-muted">☆☆</span>
+                                    </div>
+                                </div>
+                                <p class="mb-1">
+                                    <a href="user-reviews.html" class="text-decoration-none fw-bold">Jessie</a> says: I like the book than the movie.
+                                </p>
+                                <small class="text-muted">Posted on October 31, 2014</small>
+                                <div class="mt-2">
+                                    <button class="btn btn-outline-danger btn-sm">Delete this Review</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Review Section -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Add a Review</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="newReview" class="form-label">Add a Review:</label>
+                                    <textarea class="form-control" id="newReview" rows="4" required></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="newRating" class="form-label">Rating:</label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="number" class="form-control me-2" id="newRating" value="3" min="1" max="5" style="width: 80px;" required>
+                                        <span>stars.</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Notes -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="alert alert-info" role="alert">
+                        <h6 class="alert-heading">Navigation Flow</h6>
+                        <p class="mb-0 small">When the new book title and review is added, the user will be redirected to the page for that specific book.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="alert alert-warning" role="alert">
+                        <h6 class="alert-heading">Review Management</h6>
+                        <p class="mb-0 small">User can add a new review. User can also delete his own review only. A link to delete the review will appear for the logged user's review item.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
