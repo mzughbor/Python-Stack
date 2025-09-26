@@ -53,45 +53,57 @@ def new(request):
     return redirect("home")
 
 def create_tree(request):
-    if request.method == "POST":
-        if 'user_id' not in request.session:
-            return redirect("home")
+    if request.method != "POST":
+        return redirect("new")
 
-        # Get all form fields
-        species = request.POST.get('species', '').strip()
-        notes = request.POST.get('notes', '').strip()
-        location = request.POST.get('location', '').strip()
-        date_found = request.POST.get('date_found', '')
-        zip_code = request.POST.get('zip_codes', '').strip()  # Changed from zip_code to zip_codes to match form
-        
-        # Validate required fields
-        if not all([species, notes, location, date_found, zip_code]):
-            messages.error(request, "All fields are required!")
+    if 'user_id' not in request.session:
+        messages.error(request, "You must be logged in to add a tree.")
+        return redirect("home")
+
+    # Get all form fields with proper stripping
+    species = request.POST.get('species', '').strip()
+    location = request.POST.get('location', '').strip()
+    date_found_str = request.POST.get('date_found', '').strip()
+    notes = request.POST.get('notes', '').strip()
+    zip_code = request.POST.get('zip_codes', '').strip()  # Changed to zip_codes to match form
+
+    # Validate required fields
+    if not all([species, location, date_found_str, zip_code, notes]):
+        messages.error(request, "All fields are required.")
+        return redirect("new")
+
+    # Validate field lengths
+    if len(species) < 2 or len(species) > 255:
+        messages.error(request, "Species must be between 2 and 255 characters.")
+        return redirect("new")
+
+    if len(location) < 5 or len(location) > 255:
+        messages.error(request, "Location must be between 5 and 255 characters.")
+        return redirect("new")
+
+    if len(notes) > 50:
+        messages.error(request, "Notes must not exceed 50 characters.")
+        return redirect("new")
+
+    # Validate zip code format
+    if not re.match(r'^\d{5}$', zip_code):
+        messages.error(request, "Zip code must be exactly 5 digits.")
+        return redirect("new")
+
+    # Validate and parse date
+    try:
+        date_found = datetime.strptime(date_found_str, '%Y-%m-%d').date()
+        if date_found > timezone.now().date():
+            messages.error(request, "Date cannot be in the future.")
             return redirect("new")
+    except ValueError:
+        messages.error(request, "Invalid date format.")
+        return redirect("new")
 
-        # Validate and create zip code
-        try:
-            zip_codes = ZipCode.objects.get(code=zip_code)
-        except ZipCode.DoesNotExist:
-            zip_codes = ZipCode.objects.create(code=zip_code)
-        
+    # Get or create zip code using the improved method
+    try:
+        zip_codes, created = ZipCode.objects.get_or_create(code=zip_code)
         uploaded_by = User.objects.get(id=request.session['user_id'])
-
-        # Validate date format
-        try:
-            Tree.objects.create(
-                species=species,
-                location=location,
-                date_found=date_found,
-                zip_codes=zip_codes,
-                notes=notes,
-                uploaded_by=uploaded_by
-            )
-            messages.success(request, "Tree posted successfully!")
-            return redirect("home")  # Redirect to dashboard after successful creation
-        except Exception as e:
-            messages.error(request, f"Error saving tree: {str(e)}")
-    return redirect("new")
 
 def add_visit(request, id):
     """ Add a tree to user's visited list """

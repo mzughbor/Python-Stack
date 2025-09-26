@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
-
 </head>
 <body>
     <div class="container-fluid">
@@ -19,13 +18,6 @@
                         <h4 class="mb-0 display-9 fw-bold text-success">Tree Mapper</h4>
                         <p class=" text-muted">Find, share and learn about real trees!</p>
                     </div>            
-                    <!--
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-outline-secondary btn-sm">←</button>
-                        <button class="btn btn-outline-secondary btn-sm">⟲</button>
-                        <button class="btn btn-outline-secondary btn-sm">×</button>
-                    </div>
-                    -->
                     <div class="text-end">
                         <h4 class="alert-heading">Welcome, {{ user_name }}!</h4>
                         <a class="nav-link" href="/logout">Logout</a>
@@ -34,13 +26,25 @@
             </div>
         </div>
 
+        <!-- Messages Display -->
+        {% if messages %}
+            <div class="container mt-3">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <!-- Main Content -->
         <div class="container mt-4">
 
             <!-- Mapped Trees Section -->
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="mb-0">Mapped Trees</h5>
-                <a href="add-tree.html" class="btn btn-success btn-sm">+ Post a new tree on the map</a>
+                <a href="/trees/new" class="btn btn-success btn-sm">+ Post a new tree on the map</a>
             </div>
 
             <div class="card">
@@ -56,54 +60,26 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for tree in all_trees %}
                                 <tr>
                                     <td>
-                                        Koa
-                                        <div class="btn-group btn-group-sm ms-2">
-                                            <a href="edit-tree.html" class="btn btn-outline-primary btn-sm">edit</a>
-                                            <a href="#" class="btn btn-outline-danger btn-sm">delete</a>
-                                        </div>
+                                        {{ tree.species }}
+                                        {% if tree in user_trees %}
+                                            <div class="btn-group btn-group-sm ms-2">
+                                                <a href="/trees/edit/{{ tree.id }}" class="btn btn-outline-primary btn-sm">edit</a>
+                                                <a href="/trees/{{ tree.id }}/delete" class="btn btn-outline-danger btn-sm">delete</a>
+                                            </div>
+                                        {% endif %}
                                     </td>
-                                    <td><a href="tree-details.html" class="btn btn-link btn-sm">More..</a></td>
-                                    <td>Maggie Quigley</td>
-                                    <td class="text-center"><span class="badge bg-purple">96789</span></td>
+                                    <td><a href="/trees/{{ tree.id }}" class="btn btn-link btn-sm">More..</a></td>
+                                    <td>{{ tree.created_by.first_name }} {{ tree.created_by.last_name }}</td>
+                                    <td class="text-center"><span class="badge bg-purple">{{ tree.zip_code }}</span></td>
                                 </tr>
-                                <tr>
-                                    <td>Rainbow Eucalyptus</td>
-                                    <td><a href="tree-details.html" class="btn btn-link btn-sm">More..</a></td>
-                                    <td>Bethany Hamilton</td>
-                                    <td class="text-center"><span class="badge bg-purple">96721</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Madrone
-                                        <div class="btn-group btn-group-sm ms-2">
-                                            <a href="edit-tree.html" class="btn btn-outline-primary btn-sm">edit</a>
-                                            <a href="#" class="btn btn-outline-danger btn-sm">delete</a>
-                                        </div>
-                                    </td>
-                                    <td><a href="tree-details.html" class="btn btn-link btn-sm">More..</a></td>
-                                    <td>Maggie Quigley</td>
-                                    <td class="text-center"><span class="badge bg-purple">96801</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Traveller's Palm</td>
-                                    <td><a href="tree-details.html" class="btn btn-link btn-sm">More..</a></td>
-                                    <td>Peter Hernandez</td>
-                                    <td class="text-center"><span class="badge bg-purple">96713</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Plumeria</td>
-                                    <td><a href="tree-details.html" class="btn btn-link btn-sm">More..</a></td>
-                                    <td>Manti Te'o</td>
-                                    <td class="text-center"><span class="badge bg-purple">96789</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Screw Pine</td>
-                                    <td><a href="tree-details.html" class="btn btn-link btn-sm">More..</a></td>
-                                    <td>Maggie Quigley</td>
-                                    <td class="text-center"><span class="badge bg-purple">96721</span></td>
-                                </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="4" class="text-center">No trees found.</td>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
